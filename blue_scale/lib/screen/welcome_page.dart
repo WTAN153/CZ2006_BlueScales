@@ -1,5 +1,6 @@
-import 'package:blue_scale/screen/mainsearch_page.dart';
+
 import 'package:blue_scale/screen/rentsearch_page.dart';
+import 'package:blue_scale/screen/mainSearchlist_page.dart';
 import 'package:flutter/material.dart';
 
 
@@ -64,7 +65,7 @@ class WelcomePage extends StatelessWidget{
                   minWidth: 200,
                   height: 80,
                   onPressed: ()   {
-                    Navigator.push(content,MaterialPageRoute(builder: (context) => MainsearchScreen()));  // go to house price page// change context to content
+                    Navigator.push(content,MaterialPageRoute(builder: (context) => mainSearchlist_page()));  // go to house price page// change context to content
                   },
 
                   color: Orange,

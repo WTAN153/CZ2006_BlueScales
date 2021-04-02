@@ -1,5 +1,5 @@
 import 'package:blue_scale/controller/login_controller.dart';
-import 'package:blue_scale/controller/search_controller.dart';
+
 import 'package:blue_scale/entity/DataAccess.dart';
 import 'package:blue_scale/entity/Rent.dart';
 import 'package:blue_scale/screen/rentposting_page.dart';
@@ -7,7 +7,7 @@ import 'package:blue_scale/screen/view/rentlistsearch.dart';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:blue_scale/screen/userprofile2_page.dart';
+import 'package:blue_scale/screen/userprofile_page.dart';
 import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -36,7 +36,7 @@ class _RentsearchScreenState extends State<RentsearchScreen> {
 
   String queryResultSet ;
 
-  var tempSearchStore = [];
+  //var tempSearchStore = [];
 
   initiateSearch(svalue) {
 
@@ -86,7 +86,7 @@ class _RentsearchScreenState extends State<RentsearchScreen> {
                             fillColor: Colors.grey[50]),
                         onChanged: (value) {
                           _search = value
-                              .trim(); // store the password typed in the _password
+                              .trim();
                         },
                       ),
                     )
@@ -128,7 +128,7 @@ class _RentsearchScreenState extends State<RentsearchScreen> {
                     Container(
 
                         child: Padding(
-                          padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
+                          padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
 
                           child: RichText(
                               text: TextSpan(

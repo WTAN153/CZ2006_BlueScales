@@ -17,7 +17,7 @@ class _RentListsearchState extends State<RentListsearch> {
     String searchval;
     searchval= widget.searched;
 
-    final rents = Provider.of<List<Rentdata>>(context)??[];
+    final rents = Provider.of<List<Rentdata>>(context)??[]; //info of the rents data
 
 
     return ListView.builder(
@@ -46,11 +46,11 @@ class RentTile extends StatelessWidget {
 
     if (rent.blk!=null&& rent.address==searching ){
       return Card(
-        margin: EdgeInsets.all(12),
+        margin: EdgeInsets.all(5),
         elevation: 4,
         color: Colors.grey[200],
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
+          padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 16),
           child: Row(
             children: <Widget>[
               Column(
@@ -76,7 +76,7 @@ class RentTile extends StatelessWidget {
     }
     else if(rent.blk!=null&& searching=='' ){
       return Card(
-        margin: EdgeInsets.all(12),
+        margin: EdgeInsets.all(5),
         elevation: 4,
         color: Colors.grey[200],
         child: Padding(
@@ -104,7 +104,7 @@ class RentTile extends StatelessWidget {
     }else {
       if (rent.blk!=null && (searching=='' || searching==null) ) {
         return Card(
-          margin: EdgeInsets.all(12),
+          margin: EdgeInsets.all(5),
           elevation: 4,
           color: Colors.grey[200],
           child: Padding(
