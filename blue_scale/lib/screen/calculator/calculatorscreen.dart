@@ -1,4 +1,4 @@
-import 'package:blue_scale/screen/calculator/grantscreen.dart';
+import 'package:blue_scale/screen/calculator/grantpage.dart';
 import 'package:flutter/material.dart';
 import 'package:blue_scale/screen/calculator/calculator.dart';
 import 'package:flutter/services.dart';
@@ -164,7 +164,7 @@ class CalculatorOptionsWidget extends State {
       ),
       onChanged: (String newValue6) {
         setState(() {
-          dropdownValue5 = newValue6;
+          dropdownValue6 = newValue6;
         });
       },
       items:
@@ -315,80 +315,166 @@ class CalculatorOptionsWidget extends State {
         appBar: AppBar(
           title: Text('Grant Calculator Options'),
         ),
-        body: Column(children: [
-          Row(
-            children: [
-              Text('Both First time buyers?'),
-              dropButton(),
-            ],
-          ),
-          Row(
-            children: [
-              Text('Average Gross Monthly Income'),
-              Container(
-                width: 180,
-                height: 40.0,
-                child: TextFormField(
-                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Monthly HouseHold Income',
-                    ),
-                    controller: textFieldController,
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.black,
-                    ),
-                    validator: (String value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter some numbers';
-                      }
-                      return null;
-                    }),
+        body: SingleChildScrollView(
+          child: Column(children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Text('Both First time buyers?',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16)),
+                  SizedBox(width: 120),
+                  dropButton(),
+                ],
               ),
-            ],
-          ),
-          Row(
-            children: [Text('Buying 5-room flat or bigger?'), dropButton2()],
-          ),
-          Row(children: [Text('BTO?'), topupg(context), dropButton3()]),
-          Row(
-            children: [
-              Text('Enhanced Housing Grant? '),
-              ehgcouple(context),
-              dropButton4()
-            ],
-          ),
-          Row(
-            children: [Text('Family Grant? '), familyg(context), dropButton5()],
-          ),
-          Row(children: [
-            Text('Proximity Grant? '),
-            proxig(context),
-            dropButton6()
-          ]),
-          Row(children: [
-            Text('Half Housing Grant? '),
-            halfhouseg(context),
-            dropButton7()
-          ]),
-          Row(children: [
-            Text('Enhanced Housing Grant for single'),
-            echsingle(context),
-            dropButton8()
-          ]),
-          TextButton(
-              onPressed: () {
-                _sendDataToSecondScreen(context);
-              },
-              child: Text('Calculate!'),
-              style: TextButton.styleFrom(
-                  primary: Colors.white,
-                  backgroundColor: Colors.orange,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0))))
-        ] //TODO TEXTFIELD
-            ));
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Text('Average Gross Monthly Income ',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14)),
+                  Container(
+                    width: 150,
+                    height: 40.0,
+                    child: TextFormField(
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Monthly HouseHold Income',
+                        ),
+                        controller: textFieldController,
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.black,
+                        ),
+                        validator: (String value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter some numbers';
+                          }
+                          return null;
+                        }),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Text('Buying 5-room flat or bigger?',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16)),
+                  SizedBox(width: 75),
+                  dropButton2()
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(children: [
+                Text('BTO?',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16)),
+                topupg(context),
+                SizedBox(width: 225),
+                dropButton3()
+              ]),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Text('Enhanced Housing Grant? ',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16)),
+                  ehgcouple(context),
+                  SizedBox(width: 73),
+                  dropButton4()
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Text('Family Grant? ',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16)),
+                  familyg(context),
+                  SizedBox(width: 160),
+                  dropButton5()
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(children: [
+                Text('Proximity Grant? ',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16)),
+                proxig(context),
+                SizedBox(width: 140),
+                dropButton6()
+              ]),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(children: [
+                Text('Half Housing Grant? ',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16)),
+                halfhouseg(context),
+                SizedBox(width: 115),
+                dropButton7()
+              ]),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(children: [
+                Text('Enhanced Housing Grant(Single)? ',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16)),
+                echsingle(context),
+                SizedBox(width: 20),
+                dropButton8()
+              ]),
+            ),
+            TextButton(
+                onPressed: () {
+                  _sendDataToSecondScreen(context);
+                },
+                child: Text('Calculate!'),
+                style: TextButton.styleFrom(
+                    primary: Colors.white,
+                    backgroundColor: Colors.orange,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0))))
+          ] //TODO TEXTFIELD
+              ),
+        ));
   }
 
   void _sendDataToSecondScreen(BuildContext context) {
