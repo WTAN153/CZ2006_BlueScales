@@ -1,6 +1,6 @@
 
 import 'package:blue_scale/screen/rentsearch_page.dart';
-import 'package:blue_scale/screen/mainSearchlist_page.dart';
+import 'package:blue_scale/screen/mainSearchlist2_page.dart';
 import 'package:flutter/material.dart';
 
 

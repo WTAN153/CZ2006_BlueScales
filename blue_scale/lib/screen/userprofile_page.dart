@@ -1,12 +1,15 @@
 
 
 import 'package:blue_scale/controller/login_controller.dart';
+import 'package:blue_scale/entity/Rent.dart';
 import 'package:blue_scale/entity/user.dart';
 import 'package:blue_scale/screen/login_main.dart';
 import 'package:blue_scale/screen/view/Avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:blue_scale/entity/DataAccess.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
+import 'package:blue_scale/controller/user_controller.dart';
 
 
 
@@ -23,6 +26,8 @@ class userprofile_page extends StatefulWidget {
 
 class _userprofile_pageState extends State<userprofile_page> {
   final ImagePicker _picker = ImagePicker();
+  String _blkno, _address, _phone, _storey, _price;
+
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +35,10 @@ class _userprofile_pageState extends State<userprofile_page> {
     final  user = LoginController().getCurrentUID();        // Get current login user id from the firebase
     //final user ='3aaaQuCYAHhfgeTByBPHAqqR11B3';
 
+
     return StreamBuilder<Userprofiledata>(
         stream: DataAccess(uid: user).userData,
+
         builder: (context, snapshot) {
           if(snapshot.hasData){
             Userprofiledata userData = snapshot.data;          //userData now have all the access of the userdata
@@ -53,7 +60,7 @@ class _userprofile_pageState extends State<userprofile_page> {
                 children: <Widget>[
                   Text(
                     'Profile',
-                    style: TextStyle(fontSize: 30.0,color: Colors.black),
+                    style: TextStyle(fontSize: 40.0,color: Colors.black,fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 20.0),
                   /*Center(
@@ -63,7 +70,7 @@ class _userprofile_pageState extends State<userprofile_page> {
                     ),
 
                   ),*/
-                  Avatar(                            // profile pic, but not be implemented because of time
+               /*   Avatar(                            // profile pic, but not be implemented because of time
                     onTap: () async {
                       //open gallery to select image
                       await _picker.getImage(source: ImageSource.gallery,);
@@ -71,7 +78,7 @@ class _userprofile_pageState extends State<userprofile_page> {
                       //update current user
                     },
                   ),
-
+*/
 
 
 
@@ -138,6 +145,30 @@ class _userprofile_pageState extends State<userprofile_page> {
                                 }
                               }
                           ),
+                      SizedBox(height: 20.0),
+
+                      MaterialButton(       // delete the current rent post
+
+                        onPressed: () async {
+                          await UserController.storeRent(_blkno="null".toString().trim(),
+                              _address="null".toString().trim(),
+                              _phone=userData.phone.toString().trim(), _storey="null".toString().trim(),
+                              _price="null".toString().trim());
+                          //print(_address);
+                          Navigator.of(context).maybePop();
+
+
+                        },
+
+
+                        color: Colors.pink[400],
+
+                        child: Text('Delete Post',
+                            style: TextStyle(color: Colors.white)),
+                        textColor: Colors.white,
+                      ),
+                      //Text("post: ${rents}" ,style: TextStyle(fontSize: 20, color: Colors.black) ),
+
 
                     ]
                   )

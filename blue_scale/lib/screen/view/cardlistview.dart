@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../selectedSearchScreen.dart';
 import '../userprofile_page.dart';
 
 
@@ -29,6 +30,7 @@ class cardTile extends StatelessWidget {
           child: InkWell( // on chick function
           onTap: () {
            //go to the hdb detail page for further grant calculation
+            Navigator.push(context,MaterialPageRoute(builder: (context) => selectedSearchScreen(ifdata)));
           },
           child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
@@ -47,7 +49,7 @@ class cardTile extends StatelessWidget {
                   ),
                 ),
                   SizedBox(height: 4),
-                  Text(ifdata['flat_type'].toString()+' Room', style: TextStyle(color: Colors.black)),
+                  Text(ifdata['flat_type'].toString(), style: TextStyle(color: Colors.black)),
                   Text(ifdata['storey_range'].toString()+' storey', style: TextStyle(color: Colors.black)),
                   Text('Area(Sqm): '+ifdata['floor_area_sqm'].toString(), style: TextStyle(color: Colors.black)),
                   Text(ifdata['flat_model'].toString(), style: TextStyle(color: Colors.black)),

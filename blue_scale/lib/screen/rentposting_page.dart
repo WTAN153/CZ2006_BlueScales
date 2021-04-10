@@ -1,21 +1,41 @@
 import 'package:blue_scale/controller/user_controller.dart';
 import 'package:blue_scale/screen/rentsearch_page.dart';
+import 'package:blue_scale/screen/view/error_popup_widgets.dart';
 import'package:flutter/material.dart';
+import 'package:flutter_google_places/flutter_google_places.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:google_maps_webservice/places.dart';
+import 'package:flutter_google_places/flutter_google_places.dart';
 
 
-class rentpost_screen extends StatelessWidget {
+class rentpost_screen extends StatefulWidget {
+  @override
+  _rentpost_screenState createState() => _rentpost_screenState();
+}
+
+class _rentpost_screenState extends State<rentpost_screen> {
   final Color primaryColor =  Color(0xFFFFEEE8);
+
   final Color secondaryColor = Color(0xff232c51);
+
   final Color themeColor = Color(0xFFFFEEE8);
 
   final Color Orange = Color(0xffffab40);
+
   final TextEditingController nameController = TextEditingController();
+
   final TextEditingController passwordController = TextEditingController();
 
-
   String _blkno, _address, _phone, _storey, _price;
-  //need a check for null before update, cannot leave fill empty and press post
 
+  final listingTitleController = TextEditingController();
+
+
+
+
+
+
+  var addressController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -135,6 +155,10 @@ class rentpost_screen extends StatelessWidget {
                         ),
                       ],
                     ),
+
+
+
+
                     SizedBox(height: 20,),
                     Row(
                       children: [
@@ -257,12 +281,42 @@ class rentpost_screen extends StatelessWidget {
                       minWidth: 150,
                       height: 50,
                       onPressed: () async {
-                        await UserController.storeRent(_blkno.toString().trim(),
-                            _address.toString().trim(),
-                            _phone.toString().trim(), _storey.toString().trim(),
-                            _price.toString().trim());
-                        Navigator.of(context).maybePop();
+                        if (_blkno== null){
+                          await Dialogs.errorAbortDialog(
+                              context, 'Please fill up the blk no.');
+                          return;
+                        }
+                        if (_address== null){
+                          await Dialogs.errorAbortDialog(
+                              context, 'Please fill up the address');
+                          return;
+                        }
+                        if (_phone== null){
+                          await Dialogs.errorAbortDialog(
+                              context, 'Please fill up the phone no');
+                          return;
+                        }
+                        if (_storey== null){
+                          await Dialogs.errorAbortDialog(
+                              context, 'Please fill up the storey');
+                          return;
+                        }
+                        if (_price== null){
+                          await Dialogs.errorAbortDialog(
+                              context, 'Please fill up the price');
+                          return;
+                        }
+                        else {
 
+                          await UserController.storeRent(
+                              _blkno.toString().trim(),
+                              _address.toString().trim(),
+                              _phone.toString().trim(),
+                              _storey.toString().trim(),
+                              _price.toString().trim());
+                          //print(_address);
+                          Navigator.of(context).maybePop();
+                        }
 
                       },
 
@@ -288,5 +342,4 @@ class rentpost_screen extends StatelessWidget {
         )
     );
   }
-
 }

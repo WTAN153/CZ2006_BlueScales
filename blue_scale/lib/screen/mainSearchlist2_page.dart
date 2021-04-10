@@ -3,11 +3,12 @@ import 'dart:math';
 import 'package:blue_scale/screen/searchfilterpage.dart';
 import 'package:blue_scale/screen/userprofile_page.dart';
 import 'package:blue_scale/screen/view/cardlistview.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-
+// do a info page of the card that link to grant page
 class mainSearchlist_page extends StatefulWidget {
   @override
   _mainSearchlist_pageState createState() => _mainSearchlist_pageState();
@@ -27,26 +28,18 @@ class _mainSearchlist_pageState extends State<mainSearchlist_page> {
   final TextEditingController passwordController = TextEditingController();
 
 
+  List myList;
+  ScrollController _scrollController = ScrollController();
+  int _currentMax = 10;
   Map mapResponse,mapResponse1;
   List listOfFacts,listOfFacts1;
   String _search;
   String queryResultSet ;
 
-
-
-
-
-
-
-
-
-
-  //https://data.gov.sg/api/action/datastore_search?resource_id=42ff9cfe-abe5-4b54-beda-c88f9bb438ee&filters={"town":"ANG%20MO%20KIO"}
-
- Future fetchData() async {
+  Future fetchData() async {
     http.Response response;
     response = await http.get(Uri.parse(
-        'https://data.gov.sg/api/action/datastore_search?resource_id=42ff9cfe-abe5-4b54-beda-c88f9bb438ee&limit=500&sort=month%20desc'));
+        'https://data.gov.sg/api/action/datastore_search?resource_id=42ff9cfe-abe5-4b54-beda-c88f9bb438ee&limit=80000&sort=month%20desc'));
 
 
     if (response.statusCode == 200) {
@@ -55,16 +48,34 @@ class _mainSearchlist_pageState extends State<mainSearchlist_page> {
 
         mapResponse = json.decode(response.body);
         listOfFacts = mapResponse['result']['records'];
+        for (int i = _currentMax; i < _currentMax + 10; i++) {
+          myList.add(listOfFacts[i]);
+        }
+
+        _currentMax = _currentMax + 10;
+
+        setState(() {});
       });
     }
   }
 
+
+
+
+
   @override
   void initState() {
-
     super.initState();
-    fetchData();
-
+    myList = List.generate(0, (i) => "${i} ");
+    if (myList.length==0) {
+      fetchData();
+    }
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        fetchData();
+      }
+    });
   }
 
 
@@ -94,7 +105,7 @@ class _mainSearchlist_pageState extends State<mainSearchlist_page> {
                 style: TextStyle(
                     color: Colors.black, height: 0, fontSize: 20),
                 decoration: InputDecoration(
-                    labelText: 'Search',
+                    labelText: 'Town Search',
                     hintText: 'Enter Town',
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20)
@@ -122,72 +133,37 @@ class _mainSearchlist_pageState extends State<mainSearchlist_page> {
 
             new IconButton(
 
-            alignment: Alignment.center,
-            icon: new Icon(Icons.account_circle,size:35),
-            color:Colors.black,
-            onPressed: () {
-              Navigator.push(context,MaterialPageRoute(builder: (context) => userprofile_page()));
-            },
-          ),
+              alignment: Alignment.center,
+              icon: new Icon(Icons.account_circle,size:35),
+              color:Colors.black,
+              onPressed: () {
+                Navigator.push(context,MaterialPageRoute(builder: (context) => userprofile_page()));
+              },
+            ),
           ]
       ),
-      body: mapResponse == null
-          ? Container()
-          : SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            /*Text(
-              mapResponse['result']['records'].toString(),
-              style: TextStyle(fontSize: 30,color: Colors.black),
 
-            ),*/
-          /*  ListView.builder(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) {
-                return Container(
-                  margin: EdgeInsets.all(10),
-                  child: Column(
-                    children: <Widget>[
-                      //Image.network(listOfFacts[index]['image_url']),
-                      Text(
-                        listOfFacts[index]['town'].toString(),
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black
-                        ),
-                      ),
-                      Text(
-                        listOfFacts[index]['flat_type'].toString(),
-                        style: TextStyle(
-                          fontSize: 18,
-                            color: Colors.blue
-                        ),
-                      )
-                    ],
-                  ),
-                );
-              },
-              itemCount: listOfFacts == null ? 0 : listOfFacts.length,
-            ),*/
 
-              ListView.builder(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
+            body:ListView.builder(
+                //shrinkWrap: true,
+                controller: _scrollController,
+               // physics: NeverScrollableScrollPhysics(),
 
-                  itemCount: listOfFacts == null ? 0 : listOfFacts.length,
-                  itemBuilder: (context, index) {
-
-                    return cardTile((listOfFacts[index]));
-
+                //itemCount: listOfFacts == null ? 0 : listOfFacts.length,
+                itemBuilder: (context, i) {
+                  if (i == myList.length) {
+                    return CupertinoActivityIndicator();
                   }
 
-              ),
-          ],
-        ),
-      ),
+                  return cardTile((myList[i]));
+                },
+              itemCount:myList.length==null?0: myList.length + 1,
+            ),
     );
+
+
+
+
   }
 }
 

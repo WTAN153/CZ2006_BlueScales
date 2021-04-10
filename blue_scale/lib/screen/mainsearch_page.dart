@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 
 
-
+//not use
 
 class MainsearchScreen extends StatelessWidget {
   final Color primaryColor = Color(0xff18203d);

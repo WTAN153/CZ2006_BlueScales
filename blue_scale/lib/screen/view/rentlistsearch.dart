@@ -24,7 +24,9 @@ class _RentListsearchState extends State<RentListsearch> {
 
         itemCount: rents.length,
         itemBuilder: (context, index) {
-          return RentTile(( rents[index]), searchval);
+
+            return RentTile((rents[index]), searchval);
+
         }
 
     );
@@ -44,7 +46,7 @@ class RentTile extends StatelessWidget {
     String searchS;
     searchS = searching;
 
-    if (rent.blk!=null&& rent.address==searching ){
+    if (rent.blk!=null&& rent.address==searching ){ // search something
       return Card(
         margin: EdgeInsets.all(5),
         elevation: 4,
@@ -74,7 +76,8 @@ class RentTile extends StatelessWidget {
 
 
     }
-    else if(rent.blk!=null&& searching=='' ){
+    else if(rent.blk!=null&& searching=='' ){  //empty search
+      //print(rent.blk);
       return Card(
         margin: EdgeInsets.all(5),
         elevation: 4,
@@ -102,7 +105,8 @@ class RentTile extends StatelessWidget {
       );
 
     }else {
-      if (rent.blk!=null && (searching=='' || searching==null) ) {
+      if (rent.blk!=null && (searching=='' || searching==null)&& "${rent.blk}"!='null' ) {  //search is empty , initial page,they delete the posting
+        print(rent.blk);
         return Card(
           margin: EdgeInsets.all(5),
           elevation: 4,
@@ -135,7 +139,8 @@ class RentTile extends StatelessWidget {
             ),
           ),
         );
-      }else {return Container();}
+      }
+      else{return Container();}
   }
     //else {return Container();} // if there is no posting by the user there will not be any info, prevent from throwing error
 
