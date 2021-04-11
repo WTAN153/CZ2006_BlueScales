@@ -1,4 +1,5 @@
 import 'package:blue_scale/screen/calculator/calculatorscreen.dart';
+import 'package:blue_scale/screen/priceprediction_page/priceprediction_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:blue_scale/screen/welcome_page.dart';
@@ -134,7 +135,7 @@ class LoginScreen extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => CalculatorOptions(),
+                        builder: (context) => PredictPrice(),
                       ));
                 }),
 
