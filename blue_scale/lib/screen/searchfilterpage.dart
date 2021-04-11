@@ -38,6 +38,7 @@ class _searchfilterPageState extends State<searchfilterPage> {
 
 
   //https://data.gov.sg/api/action/datastore_search?resource_id=42ff9cfe-abe5-4b54-beda-c88f9bb438ee&filters={"town":"ANG%20MO%20KIO"}
+ // https://data.gov.sg/api/action/datastore_search?resource_id=42ff9cfe-abe5-4b54-beda-c88f9bb438ee&filters={"town":"BEDOK","flat_type":"4%20ROOM"}&limit=100&sort=month%20desc
 
   Future fetchData(queryResultSet) async {
     http.Response response;
