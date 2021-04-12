@@ -2,7 +2,7 @@ import 'package:blue_scale/controller/login_controller.dart';
 
 import 'package:blue_scale/entity/DataAccess.dart';
 import 'package:blue_scale/entity/Rent.dart';
-import 'package:blue_scale/screen/rentposting_page.dart';
+import 'file:///C:/Users/tzkai/AndroidStudioProjects/CZ2006_BlueScales/blue_scale/lib/screen/rent_function/rentposting_page.dart';
 import 'package:blue_scale/screen/view/rentlistsearch.dart';
 
 import 'package:flutter/gestures.dart';

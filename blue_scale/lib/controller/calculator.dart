@@ -75,7 +75,7 @@ Widget ehgcouple(BuildContext context) {
   return const Tooltip(
     message:
         'Grant of 5k~80k (depending on income) if both are first time and gross monthly income <9k for a year',
-    child: Icon(Icons.info),
+    child: Icon(Icons.info_outline),
   );
 }
 
@@ -83,7 +83,7 @@ Widget familyg(BuildContext context) {
   return const Tooltip(
     message:
         'Grant of 50k unless applying for 5-room flat or bigger (10k in this scenario) if both are first time and gross monthly income < 14k for a year',
-    child: Icon(Icons.info),
+    child: Icon(Icons.info_outline),
   );
 }
 
@@ -91,7 +91,7 @@ Widget proxig(BuildContext context) {
   return const Tooltip(
     message:
         'Grant of 20k when living within 4km of parents/children , 30k when living with them',
-    child: Icon(Icons.info),
+    child: Icon(Icons.info_outline),
   );
 }
 
@@ -99,7 +99,7 @@ Widget halfhouseg(BuildContext context) {
   return const Tooltip(
     message:
         'Grant of 25k unless applying for 5-room flat or bigger (5k in this scenario) one person must be first time and the other is second time applying, with gross monthly income capped at 14k ',
-    child: Icon(Icons.info),
+    child: Icon(Icons.info_outline),
   );
 }
 
@@ -107,7 +107,7 @@ Widget stepupg(BuildContext context) {
   return const Tooltip(
     message:
         'only for couples who are living in a two-room subsidised flat and wish to apply for a new 3-room flat in a non-mature estate.',
-    child: Icon(Icons.info),
+    child: Icon(Icons.info_outline),
   );
 }
 
@@ -115,7 +115,7 @@ Widget echsingle(BuildContext context) {
   return const Tooltip(
     message:
         '2.5k ~ 45k if one person is a first timer and the another is second-timer + average monthly household income < 4.5k',
-    child: Icon(Icons.info),
+    child: Icon(Icons.info_outline),
   );
 }
 
@@ -123,7 +123,7 @@ Widget topupg(BuildContext context) {
   return const Tooltip(
     message:
         'Family Grant amount you eligible for, minus any previously received grant amounts. Only those with monthly household income capped at 14k are eligible',
-    child: Icon(Icons.info),
+    child: Icon(Icons.info_outline),
   );
 }
 

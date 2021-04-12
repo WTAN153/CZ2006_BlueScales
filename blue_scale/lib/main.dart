@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:blue_scale/screen/login_main.dart';
+import 'file:///C:/Users/tzkai/AndroidStudioProjects/CZ2006_BlueScales/blue_scale/lib/screen/auth/login_main.dart';
 import 'package:blue_scale/entity/user.dart';
 import 'package:provider/provider.dart';
 

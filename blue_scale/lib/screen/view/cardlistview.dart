@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../selectedSearchScreen.dart';
+import '../housepriceSearch/selectedSearchScreen.dart';
 import '../userprofile_page.dart';
 
 

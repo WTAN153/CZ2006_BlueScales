@@ -19,7 +19,7 @@ class CityData {
 class storeyData {
 
 
-  static final List<String> storey = ["10 TO 12","01 TO 03","04 TO 06","07 TO 09","13 TO 15","19 TO 21","22 TO 24","16 TO 18","34 TO 36","28 TO 30","37 TO 39","49 TO 51","25 TO 27","40 TO 42","31 TO 33","46 TO 48","43 TO 45"];
+  static final List<String> storey = ["01 TO 03","04 TO 06","07 TO 09","10 TO 12","13 TO 15","16 TO 18","19 TO 21","22 TO 24","25 TO 27","28 TO 30","31 TO 33","34 TO 36","37 TO 39","40 TO 42","43 TO 45","46 TO 48","49 TO 51",];
 
 
   static List<String> getSuggestions(String query) =>

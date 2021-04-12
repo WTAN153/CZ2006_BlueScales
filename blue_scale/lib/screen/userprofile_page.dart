@@ -1,14 +1,11 @@
 
 
 import 'package:blue_scale/controller/login_controller.dart';
-import 'package:blue_scale/entity/Rent.dart';
 import 'package:blue_scale/entity/user.dart';
-import 'package:blue_scale/screen/login_main.dart';
-import 'package:blue_scale/screen/view/Avatar.dart';
+import 'file:///C:/Users/tzkai/AndroidStudioProjects/CZ2006_BlueScales/blue_scale/lib/screen/auth/login_main.dart';
 import 'package:flutter/material.dart';
 import 'package:blue_scale/entity/DataAccess.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:provider/provider.dart';
 import 'package:blue_scale/controller/user_controller.dart';
 
 
@@ -209,7 +206,7 @@ class _userprofile_pageState extends State<userprofile_page> {
               ),
             );
           } else {
-            return null;
+            return Container(width: 0.0, height: 0.0);
           }
         }
     );

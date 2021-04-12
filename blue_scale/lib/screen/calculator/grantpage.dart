@@ -9,7 +9,9 @@ import 'package:blue_scale/screen/calculator/calculatorscreen.dart';
 
 class GrantPage extends StatelessWidget {
   final int text;
-  final String ans1, ans2, ans3, ans4, ans5, ans6, ans7, ans8;
+  final String ans1, ans2, ans3, ans4, ans5, ans6, ans7, ans8, ans9;
+  String oprice;
+  final Color themeColor = Color(0xFFFFF3E0);
   GrantPage({
     Key key,
     @required this.text,
@@ -21,107 +23,154 @@ class GrantPage extends StatelessWidget {
     @required this.ans6,
     @required this.ans7,
     @required this.ans8,
+    @required this.ans9, // this is the original price
+
   }) : super(key: key);
   int ecg, pg, fg, ecsg, hg, grant, predictedprice;
+
+  int finalprice,iprice;
+
+
   @override
   Widget build(BuildContext context) {
+
+    oprice=ans9;
+    iprice = int.parse(oprice);
+
+
+    finalprice=iprice- totalgrant(
+        ecgc(ans1, text, ans3),
+        pgc(ans6),
+        fgc(ans1, text, ans3, ans2, ans5),
+        hgc(ans1, text, ans7),
+        ecgs(ans1, text, ans8)); // calculate the final price
+
     return Scaffold(
         appBar: AppBar(
-          title: Text('Grant Applicable'),
+          backgroundColor: themeColor,
+          leading: new IconButton(
+            icon: new Icon(Icons.arrow_back),
+            color:Colors.black,
+            onPressed: () {
+              Navigator.of(context).maybePop();
+            },
+          ),
+          title: Text('Grant Applicable',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 30),),
         ),
         body: Center(
             child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-              child: Text('Purchaseable Price',
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16)),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text('Based on the price and after deduction due to grant',
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16)),
-            ),
-            SizedBox(height: 10),
-            Text('change to calculated price',
-                style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16)),
-            SizedBox(
-              height: 20,
-            ),
-            //overallcost(grant, predictedprice)
-            //.toString()), //TODO change to the original-the grant()
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Original',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16)) //TODO replace with predicted price
-                ,
-                Text(' - ',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16)),
-                Text(
-                    totalgrant(
-                            ecgc(ans1, text, ans3),
-                            pgc(ans6),
-                            fgc(ans1, text, ans3, ans2, ans5),
-                            hgc(ans1, text, ans7),
-                            ecgs(ans1, text, ans8))
-                        .toString(),
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16))
-              ],
-            ),
-            SizedBox(
-              height: 55,
-            ),
-            Container(
-              child: Column(
-                children: [
-                  Text('Grant Break Down',
+                SizedBox(height: 20),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0, bottom: 0),
+                  child: Text('Purchaseable Price',
                       style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
+                          fontSize: 25)),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: Text('Based on the price and after deduction due to grant',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.normal,
                           fontSize: 16)),
-                  SizedBox(height: 20),
-                  Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            left: 50.0, right: 20.0, top: 8.0, bottom: 8.0),
-                        child: Text('Enchanced House Grant',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16)),
-                      ),
-                      SizedBox(
-                        width: 40,
-                      ),
-                      SizedBox(
-                        child: Text(ecgc(ans1, text, ans3).toString(),
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16)),
-                      )
-                    ],
+                ),
+                SizedBox(height: 10),
+                Text(finalprice.toString(),
+                    style: TextStyle(
+                        color: Colors.orange,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 50)),
+                SizedBox(
+                  height: 20,
+                ),
+                //overallcost(grant, predictedprice)
+                //.toString()), //TODO change to the original-the grant()
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(oprice,
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16)) //TODO replace with predicted price
+                    ,
+                    Text(' - ',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16)),
+                    Text(
+                        totalgrant(
+                                ecgc(ans1, text, ans3),
+                                pgc(ans6),
+                                fgc(ans1, text, ans3, ans2, ans5),
+                                hgc(ans1, text, ans7),
+                                ecgs(ans1, text, ans8))
+                            .toString(),
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16))
+                  ],
+
+                ),
+                Text('(Price)     (Grant)',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.normal,
+                        fontSize: 16)),
+                SizedBox(
+                  height: 40,
+                ),
+                Container(
+
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.black,
+                      width: 1,
+
+
+                    ),
+                      borderRadius:BorderRadius.circular(20)
                   ),
+                  height: 300,
+                  width: 400,
+                  child: Column(
+
+                    children: [
+                      SizedBox(height: 10),
+                      Text('Grant Break Down',
+                          style: TextStyle(
+                              color: Colors.orange,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 25)),
+                      SizedBox(height: 10),
+                      Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 50.0, right: 20.0, top: 0, bottom: 8.0),
+                            child: Text('Enchanced House Grant',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16)),
+                          ),
+                          SizedBox(
+                            width: 40,
+                          ),
+                          SizedBox(
+                            child: Text(ecgc(ans1, text, ans3).toString(),
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16)),
+                          )
+                        ],
+                      ),
                   Row(
                     children: [
                       Padding(
@@ -206,7 +255,17 @@ class GrantPage extends StatelessWidget {
                                 fontSize: 16)),
                       )
                     ],
-                  )
+                  ),
+                      SizedBox(height: 30),
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text('*Above grant calculated is just an estimate and may not be the exact amount. Please consult with your realtor for the amount.', style: TextStyle(
+                          fontSize: 10.0,
+                          color: Colors.blueGrey,
+                        ),),
+                      ),
+
+
                 ],
               ),
             ),

@@ -8,6 +8,8 @@ import 'package:flutter_sparkline/flutter_sparkline.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
+import '../calculator/calculatorscreen.dart';
+
 
 
 
@@ -41,7 +43,7 @@ class _selectedSearchScreenState extends State<selectedSearchScreen> {
   var data =[1.0,2.0,3.0];
 
 
-
+// collection of data of the graph
   Future <double> fetchData(vv1,vv2,vv3) async {
     http.Response response;
     response = await http.get(Uri.parse(
@@ -155,7 +157,7 @@ class _selectedSearchScreenState extends State<selectedSearchScreen> {
 
 
                       SizedBox(height: 20,),
-                      Text('Price', style: TextStyle(color: Colors.black, fontSize: 20),),
+                      Text('Price', style: TextStyle(color: Colors.black, fontSize: 20,fontWeight: FontWeight.bold),),
                       Text(r"$"+widget.flatdata['resale_price'].toString(),style: TextStyle(color: Orange,fontSize: 50,fontWeight: FontWeight.bold)),
                       Text('Date: '+widget.flatdata['month'].toString(),style: TextStyle(color: Colors.black)),
                       SizedBox(height: 20,),
@@ -164,7 +166,11 @@ class _selectedSearchScreenState extends State<selectedSearchScreen> {
                         minWidth: 180,
                         height: 30,
                         onPressed: ()   {
-                           // go to grant calculation
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => CalculatorOptions(widget.flatdata['resale_price'].toString()),
+                              ));// go to grant calculation
                         },
 
                         color: Orange,

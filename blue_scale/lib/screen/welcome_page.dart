@@ -1,6 +1,6 @@
 
-import 'package:blue_scale/screen/rentsearch_page.dart';
-import 'package:blue_scale/screen/mainSearchlist_page.dart';
+import 'file:///C:/Users/tzkai/AndroidStudioProjects/CZ2006_BlueScales/blue_scale/lib/screen/rent_function/rentsearch_page.dart';
+import 'file:///C:/Users/tzkai/AndroidStudioProjects/CZ2006_BlueScales/blue_scale/lib/screen/housepriceSearch/mainSearchlist_page.dart';
 import 'package:flutter/material.dart';
 
 
