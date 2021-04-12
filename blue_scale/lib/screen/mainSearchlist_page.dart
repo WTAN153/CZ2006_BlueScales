@@ -1,12 +1,14 @@
 import 'dart:math';
 
-import 'package:blue_scale/screen/searchfilterpage.dart';
+import 'package:blue_scale/screen/NOTUSE.dart';
 import 'package:blue_scale/screen/userprofile_page.dart';
 import 'package:blue_scale/screen/view/cardlistview.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+
+import 'filter_page.dart';
 
 // do a info page of the card that link to grant page
 class mainSearchlist_page extends StatefulWidget {
@@ -97,7 +99,7 @@ class _mainSearchlist_pageState extends State<mainSearchlist_page> {
           ),
 
           actions: <Widget>[
-            Container(
+            /*Container(
               width: 250,
 
               child:
@@ -117,14 +119,25 @@ class _mainSearchlist_pageState extends State<mainSearchlist_page> {
                       .trim();
                 },
               ),
-            )
-            , IconButton(
+            )*/
+            /* IconButton(
               alignment: Alignment.center,
               icon: new Icon(Icons.search, size: 35),
               color: Colors.black,
               onPressed:  ()async  {
 
                 Navigator.push(context,MaterialPageRoute(builder: (context) => searchfilterPage(_search)));
+
+              },
+            ),*/
+            IconButton(
+              alignment: Alignment.center,
+              icon: new Icon(Icons.search, size: 35),
+              color: Colors.black,
+              onPressed:  ()async  {
+
+                //go to filter page WIP
+                Navigator.push(context,MaterialPageRoute(builder: (context) => filter_screen()));
 
               },
             ),

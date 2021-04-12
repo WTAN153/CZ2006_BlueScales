@@ -74,6 +74,21 @@ class WelcomePage extends StatelessWidget{
                       style: TextStyle(color: Colors.white, fontSize: 30)),
                   textColor: Colors.white,
                 ),
+                SizedBox(height: 40,),
+                MaterialButton(
+                  elevation: 0,
+                  minWidth: 200,
+                  height: 80,
+                  onPressed: ()   {
+                      // go to predict house price page// change context to content
+                  },
+
+                  color: Orange,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+                  child: Text('Predict Price',
+                      style: TextStyle(color: Colors.white, fontSize: 30)),
+                  textColor: Colors.white,
+                ),
 
 
 
@@ -81,7 +96,8 @@ class WelcomePage extends StatelessWidget{
 
 
 
-          ]
+
+              ]
       )
       )
       )

@@ -38,10 +38,11 @@ class _selectedSearchScreenState extends State<selectedSearchScreen> {
   List myList;
 
   var resaledata=[];
+  var data =[1.0,2.0,3.0];
 
 
 
-  Future <int> fetchData(vv1,vv2,vv3) async {
+  Future <double> fetchData(vv1,vv2,vv3) async {
     http.Response response;
     response = await http.get(Uri.parse(
         'https://data.gov.sg/api/action/datastore_search?resource_id=42ff9cfe-abe5-4b54-beda-c88f9bb438ee&filters={"town":"'+vv1+'","flat_type":"'+vv2+'","street_name":"'+vv3+'"}&limit=100&sort=month%20desc'));
@@ -50,10 +51,19 @@ class _selectedSearchScreenState extends State<selectedSearchScreen> {
         mapResponse = json.decode(response.body);
         listOfFacts = mapResponse['result']['records'];
         //print(mapResponse['result']['total']);
+        for (int i = 0; i < listOfFacts.length; i++) {
+          var resaleprice = double.parse(listOfFacts[i]['resale_price']);
+          resaledata.add(resaleprice);
+        }
 
+         List<double> intList = resaledata.map((s) => s as double).toList();
+
+
+        final double gap =  intList[listOfFacts.length - 1] - intList[0];
 
 
         setState(() {});
+
 
       });
     }
@@ -67,42 +77,48 @@ class _selectedSearchScreenState extends State<selectedSearchScreen> {
     v2=widget.flatdata['flat_type'].toString();
     v3=widget.flatdata['street_name'].toString();
 
-    // fetchData(queryResultSet);
     super.initState();
-       Future<int> max=fetchData(v1,v2,v3);
+      fetchData(v1,v2,v3) ;
 
 
 
-  }
+    }
+
+
+
 
 
   @override
   Widget build(BuildContext context ) {
 
 
-   int max;
-    if (mapResponse['result']['total'] > 100) {
-    max = 100;
-    }
-    else {
-    max = mapResponse['result']['total'];
-    }
 
-      // List<double> intList = resaledata.map((s) => s as double).toList();
-      for (int i = 0; i < max; i++) {
+
+    double gaps;
+    var Listdata=[0.0,0.0];
+
+    try {
+      for (int i = 0; i < listOfFacts.length; i++) {
         var resaleprice = double.parse(listOfFacts[i]['resale_price']);
         resaledata.add(resaleprice);
       }
-      List<double> intList = resaledata.map((s) => s as double).toList();
-      intList.sort();
-      double gap = intList[max - 1] - intList[0];
-      //print(intList);
 
-    return listOfFacts.length==null?
-    Center(child: CircularProgressIndicator())
-        :
+       List<double> intList = resaledata.map((s) => s as double).toList();
+      intList.sort();
+      Listdata =intList;
+      double gap = intList[listOfFacts.length - 1] - intList[0];
+      print(gap);
+      gaps =gap;
+
+    } on TimeoutException catch (e) {
+      print('Timeout');
+    } on Error catch (e) {
+      print('Error: $e');
+    }
+    return
 
     Scaffold(
+
         appBar: AppBar(
             backgroundColor: themeColor,
             elevation: 0,
@@ -129,9 +145,14 @@ class _selectedSearchScreenState extends State<selectedSearchScreen> {
         extendBodyBehindAppBar: false,
         body:Center(
 
+
+
             child:Container(
                 child: Column(
+
+
                     children: <Widget>[
+
 
                       SizedBox(height: 20,),
                       Text('Price', style: TextStyle(color: Colors.black, fontSize: 20),),
@@ -165,7 +186,7 @@ class _selectedSearchScreenState extends State<selectedSearchScreen> {
 
                       Padding(
                         padding: EdgeInsets.all(1.0),
-                        child: Text('Price difference: '+ gap.toString(), style: TextStyle(
+                        child: Text('Price difference: '+ gaps.toString(), style: TextStyle(
                             fontSize: 15.0,
                             color: Colors.black
                         ),),
@@ -188,7 +209,7 @@ class _selectedSearchScreenState extends State<selectedSearchScreen> {
 
 
 
-                            data: intList,
+                            data:  Listdata,//intList,
                             lineColor: Color(0xffff6101),
                             pointsMode: PointsMode.none,
                             pointSize: 8.0,
