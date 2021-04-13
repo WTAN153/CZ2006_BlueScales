@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'file:///C:/Users/tzkai/AndroidStudioProjects/CZ2006_BlueScales/blue_scale/lib/screen/auth/login_main.dart';
+import 'package:blue_scale/screen/auth/login_main.dart';
 import 'package:blue_scale/entity/user.dart';
 import 'package:provider/provider.dart';
-
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,16 +17,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     //User user = Provider.of<User>(context);
     return MaterialApp(
-
         debugShowCheckedModeBanner: false,
         title: "BlueScale",
         theme: ThemeData(
-            textTheme: Theme.of(context).textTheme.apply(
-                bodyColor: Colors.white,
-                displayColor: Colors.white)),
-
+            textTheme: Theme.of(context)
+                .textTheme
+                .apply(bodyColor: Colors.white, displayColor: Colors.white)),
         home: LoginScreen());
-
-
   }
 }

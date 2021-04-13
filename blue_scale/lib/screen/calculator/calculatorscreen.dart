@@ -1,6 +1,6 @@
 import 'package:blue_scale/screen/calculator/grantpage.dart';
 import 'package:flutter/material.dart';
-import 'file:///C:/Users/tzkai/AndroidStudioProjects/CZ2006_BlueScales/blue_scale/lib/controller/calculator.dart';
+import 'package:blue_scale/controller/calculator.dart';
 import 'package:flutter/services.dart';
 
 class CalculatorOptions extends StatefulWidget {
@@ -10,7 +10,7 @@ class CalculatorOptions extends StatefulWidget {
   CalculatorOptionsWidget createState() => CalculatorOptionsWidget();
 }
 
-class CalculatorOptionsWidget extends State<CalculatorOptions>  {
+class CalculatorOptionsWidget extends State<CalculatorOptions> {
   TextEditingController textFieldController = TextEditingController();
   String dropdownValue = 'Yes',
       dropdownValue2 = 'Yes',
@@ -21,11 +21,9 @@ class CalculatorOptionsWidget extends State<CalculatorOptions>  {
       dropdownValue7 = 'Yes',
       dropdownValue8 = 'Yes';
   String holder, holder2, holder3, holder4, holder5, holder6, holder7, holder8;
-  String ans1, ans2, ans3, ans4, ans5, ans6, ans7, ans8,ans9;
+  String ans1, ans2, ans3, ans4, ans5, ans6, ans7, ans8, ans9;
   String originalprice;
   final Color themeColor = Color(0xFFFFF3E0);
-
-
 
   Widget dropButton() {
     return DropdownButton<String>(
@@ -33,17 +31,10 @@ class CalculatorOptionsWidget extends State<CalculatorOptions>  {
       icon: const Icon(Icons.arrow_downward),
       iconSize: 24,
       elevation: 16,
-
-      style: const TextStyle(color: Colors.deepPurple
-      ),
-
-
-
+      style: const TextStyle(color: Colors.deepPurple),
       underline: Container(
         height: 2,
         color: Colors.deepPurpleAccent,
-
-
       ),
       onChanged: (String newValue) {
         setState(() {
@@ -323,10 +314,8 @@ class CalculatorOptionsWidget extends State<CalculatorOptions>  {
   // }
 
   @override
-
   Widget build(BuildContext context) {
     //print(widget.price);
-
 
     return Scaffold(
         appBar: AppBar(
@@ -334,16 +323,19 @@ class CalculatorOptionsWidget extends State<CalculatorOptions>  {
           elevation: 0,
           leading: new IconButton(
             icon: new Icon(Icons.arrow_back),
-            color:Colors.black,
+            color: Colors.black,
             onPressed: () {
               Navigator.of(context).maybePop();
             },
           ),
-          title: Text('Grant Calculator Options',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 25),),
+          title: Text(
+            'Grant Calculator Options',
+            style: TextStyle(
+                color: Colors.black, fontWeight: FontWeight.bold, fontSize: 25),
+          ),
         ),
         backgroundColor: themeColor,
         body: SingleChildScrollView(
-
           child: Column(children: [
             SizedBox(height: 20),
             Padding(
@@ -379,7 +371,6 @@ class CalculatorOptionsWidget extends State<CalculatorOptions>  {
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           labelText: 'Monthly HouseHold Income',
-
                         ),
                         controller: textFieldController,
                         style: TextStyle(
@@ -493,13 +484,11 @@ class CalculatorOptionsWidget extends State<CalculatorOptions>  {
               ]),
             ),
             TextButton(
-
                 onPressed: () {
                   _sendDataToSecondScreen(context);
                 },
                 child: Text('Calculate'),
                 style: TextButton.styleFrom(
-
                     primary: Colors.white,
                     backgroundColor: Colors.orange,
                     shape: RoundedRectangleBorder(
@@ -527,7 +516,7 @@ class CalculatorOptionsWidget extends State<CalculatorOptions>  {
     ans6 = holder6;
     ans7 = holder7;
     ans8 = holder8;
-    originalprice= widget.price;
+    originalprice = widget.price;
     //print(originalprice);
     Navigator.push(
         context,
@@ -541,7 +530,7 @@ class CalculatorOptionsWidget extends State<CalculatorOptions>  {
             ans6: ans6,
             ans7: ans7,
             ans8: ans8,
-            ans9:originalprice,
+            ans9: originalprice,
             text: textToSend,
           ),
         ));

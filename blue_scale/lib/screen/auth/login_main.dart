@@ -1,8 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:blue_scale/screen/welcome_page.dart';
-import 'file:///C:/Users/tzkai/AndroidStudioProjects/CZ2006_BlueScales/blue_scale/lib/screen/auth/register_page.dart';
+import 'package:blue_scale/screen/auth/register_page.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:blue_scale/controller/login_controller.dart';
 import 'package:flutter/gestures.dart';
@@ -130,7 +129,6 @@ class LoginScreen extends StatelessWidget {
                         style: TextStyle(color: Colors.white, fontSize: 20)),
                   ),
                 ),
-
 
                 SizedBox(height: 50),
 
