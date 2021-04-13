@@ -6,8 +6,9 @@ import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/services.dart' show ByteData, rootBundle;
 import 'dart:convert';
-
+import 'package:requests/requests.dart';
 import 'package:blue_scale/screen/priceprediction_page/showMLprice.dart';
+import 'dart:math' as math;
 
 GlobalKey<PredictPricePage> myKey = GlobalKey();
 // class PriceParameter {
@@ -691,11 +692,12 @@ class PredictPricePage extends State {
                       child: Text('Enter'),
                       onPressed: () {
                         //_sendDataToPredictPrice(context);
-                        writeToFile();
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ShowMLPrice(myKey)));
+                        // writeToFile();
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) => ShowMLPrice(myKey)));
+                        getLatitudeAndLongitude();
                       }),
                 ),
               ),
@@ -803,21 +805,76 @@ class PredictPricePage extends State {
     return File('$path/$fileName');
   }
 
-  void readJson() async {
-    // Initialize jsonFile
-    jsonFile = await _localFile;
+  void getLatitudeAndLongitude() async {
+    String blockNumber = blocktextfield.text;
+    String streettown = streettowntextfield.text;
+    String address = blockNumber + ' ' + streettown;
+    ByteData data = await rootBundle.load("assets/datasheet.xlsx");
+    var bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+    var excel = Excel.decodeBytes(bytes);
+    double lat2, long2;
 
-    // If the _file exists->read it: update initialized _json by what's in the _file
-    if (fileExists) {
-      try {
-        //1. Read fileName<String> from the _file.
-        fileContent = json.decode(jsonFile.readAsStringSync());
-        print(fileContent);
-      } catch (e) {
-        // Print exception errors
-        print('Tried reading _file error: $e');
-        // If encountering an error, return null
-      }
+    var sheet = excel['Sheet1'];
+    var query_string =
+        'https://developers.onemap.sg/commonapi/search?searchVal=' +
+            address +
+            '&returnGeom=Y&getAddrDetails=N';
+    var resp = await Requests.get(query_string);
+    String data1 = resp.content(); //content of data1 has the request
+    var locFile = resp.json();
+
+    print(data1);
+    Map<String, dynamic> user = jsonDecode(data1);
+    List<dynamic> data5 = user["results"];
+    print(data5[3]["LATITUDE"]);
+    print(
+        'TESTING U BCH PLS PLS PLS Activity ID:  ${user['results'][3]['LATITUDE']}');
+    // double lat = user['results'][3]['LATITUDE'];
+
+    // print('I dont get it why this is so hard like seriously ' + lat.toString());
+    // dynamic lat = ({user['results'][4]['LATITUDE']});
+    // dynamic long = ({user['results']['LONGITUDE']});
+
+    // print('This is latitude la u fktard ' + lat.toString());
+    // print('This is longtitude bitch ' + long.toString());
+
+    double lat1;
+    double long1;
+
+    int r = 6371000;
+    String closest_mrt = '';
+    double smallest_dist = 10000;
+    String mrtName;
+
+    for (int i = 1; i <= 122; i++) {
+      String cellLong = 'E' + i.toString();
+      String cellLat = 'F' + i.toString();
+      String mrt = 'A' + i.toString();
+
+      var cellE = sheet.cell(CellIndex.indexByString(cellLong));
+      long2 = cellE.value;
+
+      var cellF = sheet.cell(CellIndex.indexByString(cellLat));
+      lat2 = cellF.value;
+
+      var cellA = sheet.cell(CellIndex.indexByString(mrt));
+      mrtName = cellA.value;
+
+      long2 = long2 * math.pi / 180;
+      lat2 = lat2 * math.pi / 180;
+
+      double a = math.sin((lat2 - lat1) / 2) * math.sin((lat2 - lat1) / 2) +
+          math.cos(lat1) *
+              math.cos(lat2) *
+              math.sin((long2 - long1) / 2) *
+              math.sin((long2 - long1) / 2);
+
+      double c = 2 * math.asin(math.sqrt(a));
+
+      double totaldist = c * r;
+
+      if (totaldist < smallest_dist) smallest_dist = totaldist;
+      closest_mrt = mrtName;
     }
   }
 }

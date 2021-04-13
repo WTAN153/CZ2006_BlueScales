@@ -31,7 +31,7 @@ class ShowMLPricePage extends State {
               TextButton(
                 child: Text('testing!'),
                 onPressed: () {
-                  myKey.currentState.readJson();
+                  // myKey.currentState.readJson();
                 },
               )
             ],
