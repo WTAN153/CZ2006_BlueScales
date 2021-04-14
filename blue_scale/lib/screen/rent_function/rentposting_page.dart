@@ -122,7 +122,7 @@ class _rentpost_screenState extends State<rentpost_screen> {
                           style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
                               labelText: 'Address',
-                              hintText: 'eg. Jurong street',
+                              hintText: 'eg. Jurong street 21',
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(20)),
                               filled: true,
@@ -229,7 +229,7 @@ class _rentpost_screenState extends State<rentpost_screen> {
                         child: TextField(
                           style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
-                              labelText: 'Price /Optional',
+                              labelText: 'Price ',
                               hintText: 'eg. 123',
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(20)),
