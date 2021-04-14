@@ -44,7 +44,7 @@ class PredictPrice extends StatefulWidget {
 }
 
 class PredictPricePage extends State {
-  GlobalKey<PredictPricePage> myKey = GlobalKey();
+  double predictedPrice;
   String town = 'Ang Mo Kio';
   String flattype = 'Adjoined Flat';
   String storeyrange = '1';
@@ -691,13 +691,13 @@ class PredictPricePage extends State {
                               borderRadius: BorderRadius.circular(20.0))),
                       child: Text('Enter'),
                       onPressed: () {
-                        //_sendDataToPredictPrice(context);
+                        getPredictedPrice();
                         // writeToFile();
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) => ShowMLPrice(myKey)));
-                        getLatitudeAndLongitude();
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ShowMLPricePage(
+                                    predictedPrice: predictedPrice)));
                       }),
                 ),
               ),
@@ -805,7 +805,7 @@ class PredictPricePage extends State {
     return File('$path/$fileName');
   }
 
-  void getLatitudeAndLongitude() async {
+  void getPredictedPrice() async {
     String blockNumber = blocktextfield.text;
     String streettown = streettowntextfield.text;
     String address = blockNumber + ' ' + streettown;
@@ -813,6 +813,11 @@ class PredictPricePage extends State {
     var bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
     var excel = Excel.decodeBytes(bytes);
     double lat2, long2;
+    String floorsqm = (floorpersqmtextfield.text);
+    getTown();
+    getFlat();
+    getStorey();
+    getLease();
 
     var sheet = excel['Sheet1'];
     var query_string =
@@ -821,44 +826,40 @@ class PredictPricePage extends State {
             '&returnGeom=Y&getAddrDetails=N';
     var resp = await Requests.get(query_string);
     String data1 = resp.content(); //content of data1 has the request
-    var locFile = resp.json();
+    // var locFile = resp.json();
 
-    print(data1);
     Map<String, dynamic> user = jsonDecode(data1);
     List<dynamic> data5 = user["results"];
-    print(data5[3]["LATITUDE"]);
-    print(
-        'TESTING U BCH PLS PLS PLS Activity ID:  ${user['results'][3]['LATITUDE']}');
-    // double lat = user['results'][3]['LATITUDE'];
 
-    // print('I dont get it why this is so hard like seriously ' + lat.toString());
-    // dynamic lat = ({user['results'][4]['LATITUDE']});
-    // dynamic long = ({user['results']['LONGITUDE']});
+    double lat1 = double.parse(data5[0]["LATITUDE"]);
+    double long1 = double.parse(data5[0]["LONGITUDE"]);
 
-    // print('This is latitude la u fktard ' + lat.toString());
-    // print('This is longtitude bitch ' + long.toString());
-
-    double lat1;
-    double long1;
+    long1 = long1 * math.pi / 180;
+    lat1 = lat1 * math.pi / 180;
 
     int r = 6371000;
     String closest_mrt = '';
     double smallest_dist = 10000;
-    String mrtName;
+    String mrtName, timeTaken;
+    int timemrt;
 
-    for (int i = 1; i <= 122; i++) {
+    for (int i = 2; i <= 122; i++) {
       String cellLong = 'E' + i.toString();
       String cellLat = 'F' + i.toString();
       String mrt = 'A' + i.toString();
+      String cellTime = 'B' + i.toString();
 
       var cellE = sheet.cell(CellIndex.indexByString(cellLong));
-      long2 = cellE.value;
+      long2 = double.parse(cellE.value);
 
       var cellF = sheet.cell(CellIndex.indexByString(cellLat));
-      lat2 = cellF.value;
+      lat2 = double.parse(cellF.value);
 
       var cellA = sheet.cell(CellIndex.indexByString(mrt));
       mrtName = cellA.value;
+
+      var cellB = sheet.cell(CellIndex.indexByString(cellTime));
+      timeTaken = cellB.value.toString();
 
       long2 = long2 * math.pi / 180;
       lat2 = lat2 * math.pi / 180;
@@ -873,8 +874,21 @@ class PredictPricePage extends State {
 
       double totaldist = c * r;
 
-      if (totaldist < smallest_dist) smallest_dist = totaldist;
-      closest_mrt = mrtName;
+      if (totaldist < smallest_dist) {
+        smallest_dist = totaldist;
+        closest_mrt = mrtName;
+        timemrt = int.parse(timeTaken);
+      }
     }
+    double timetaken = smallest_dist / 80;
+
+    predictedPrice = 61000 +
+        flatPremium +
+        townPremium +
+        3790 * storeyPremium +
+        2820 * int.parse(floorsqm) +
+        4260 * leasePremium -
+        5740 * timetaken -
+        5430 * timemrt;
   }
 }

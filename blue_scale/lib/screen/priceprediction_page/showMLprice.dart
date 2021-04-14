@@ -4,20 +4,22 @@ import 'dart:io';
 import 'package:blue_scale/screen/priceprediction_page/priceprediction_page.dart';
 import 'package:flutter/material.dart';
 
-class ShowMLPrice extends StatefulWidget {
-  final GlobalKey<PredictPricePage> myKey;
-  ShowMLPrice(this.myKey);
-  @override
-  ShowMLPricePage createState() => ShowMLPricePage();
-}
+// class ShowMLPrice extends StatefulWidget {
+//   final double predictedPrice;
+//   ShowMLPrice({
+//     Key key,
+//     @required this.predictedPrice,
+//   }) : super(key: key);
+//   @override
+//   ShowMLPricePage createState() => ShowMLPricePage();
+// }
 
-class ShowMLPricePage extends State {
-  File jsonFile;
-  Directory dir;
-  String fileName = "myFile.json";
-  bool fileExists = false;
-  Map<String, dynamic> fileContent;
-
+class ShowMLPricePage extends StatelessWidget {
+  final double predictedPrice;
+  ShowMLPricePage({
+    Key key,
+    @required this.predictedPrice,
+  }) : super(key: key);
   @override
   Widget build(context) {
     return Scaffold(
@@ -25,11 +27,23 @@ class ShowMLPricePage extends State {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              Text('Price of the Predicted Flat'),
-              Text('Price'), //TODO add in ML price
+              Center(
+                child: Text('Price of the Predicted Flat',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16)),
+              ),
+              Center(
+                child: Text(predictedPrice.toString(),
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16)),
+              ),
               Text('Parameters Taken in:'),
               TextButton(
-                child: Text('testing!'),
+                child: Text('Grant Calculator'),
                 onPressed: () {
                   // myKey.currentState.readJson();
                 },
