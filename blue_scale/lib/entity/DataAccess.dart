@@ -1,6 +1,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import'package:blue_scale/entity/user.dart';
+import'package:blue_scale/entity/favdata.dart';
 
 import 'Rent.dart';
 
@@ -84,6 +85,47 @@ class DataAccess {
     return infoCollection.snapshots().map(
         _rentdataFromSnapshot); // check on the firestore base on the uid(current user)
   }
+
+
+
+  Future updatefavData(String blk, String address, String storey,
+      String price) async {
+    return await infoCollection.doc(uid).update(
+        { // updating the current existing database with additional data
+          'fblk': blk,
+          'faddress': address,
+          'fstorey': storey,
+          'fprice': price
+        });
+  }
+ /* Userprofiledata _userprofileFromSnapshot(DocumentSnapshot snapshot) {
+    return Userprofiledata(
+        uid: uid,
+        email: snapshot.data()['email'],
+        name: snapshot.data()['name'],
+        phone: snapshot.data()['phone']
+    );
+  }*/
+
+  favdata _favdataFromSnapshot(DocumentSnapshot snapshot) {
+
+      return favdata(
+          uid: uid,
+          fblk: snapshot.data()['fblk'],
+          faddress: snapshot.data()['faddress'],
+
+          fstorey: snapshot.data()['fstorey'],
+          fprice: snapshot.data()['fprice']
+      );
+
+  }
+
+
+  Stream<favdata> get userfData {
+    return infoCollection.doc(uid).snapshots().map(
+        _favdataFromSnapshot); // check on the firestore base on the uid(current user)
+  }
+
 
 
 }
