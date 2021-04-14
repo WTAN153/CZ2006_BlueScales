@@ -9,6 +9,11 @@ import 'dart:convert';
 import 'package:requests/requests.dart';
 import 'package:blue_scale/screen/priceprediction_page/showMLprice.dart';
 import 'dart:math' as math;
+import 'package:fluttertoast/fluttertoast.dart';
+
+displayToastMessage(String message, BuildContext context) {
+  return Fluttertoast.showToast(msg: message, backgroundColor: Colors.red);
+}
 
 GlobalKey<PredictPricePage> myKey = GlobalKey();
 // class PriceParameter {
@@ -53,15 +58,9 @@ class PredictPricePage extends State {
   TextEditingController streettowntextfield = TextEditingController();
 
   String leaseremaining = '99';
-
-  String exceltown, excelflat, excelstorey, excellease, exceladdress;
   int townPremium, flatPremium, storeyPremium, leasePremium;
 
-  File jsonFile;
-  Directory dir;
-  String fileName = 'form.json';
-  bool fileExists = false;
-  Map<String, dynamic> fileContent;
+  bool proceed;
 
   Widget townDropDownList() {
     return DropdownButton<String>(
@@ -501,7 +500,8 @@ class PredictPricePage extends State {
                   ),
                   Padding(
                     padding: EdgeInsets.only(
-                        left: (MediaQuery.of(context).size.width / 10)),
+                        left: (MediaQuery.of(context).size.width / 3),
+                        right: (MediaQuery.of(context).size.width / 98)),
                     child: townDropDownList(),
                   ),
                 ],
@@ -518,7 +518,8 @@ class PredictPricePage extends State {
                   ),
                   Padding(
                     padding: EdgeInsets.only(
-                        left: (MediaQuery.of(context).size.width / 10)),
+                        left: (MediaQuery.of(context).size.width / 7),
+                        right: (MediaQuery.of(context).size.width / 98)),
                     child: flatTypeDropDownList(),
                   ),
                 ],
@@ -535,7 +536,8 @@ class PredictPricePage extends State {
                   ),
                   Padding(
                     padding: EdgeInsets.only(
-                        left: (MediaQuery.of(context).size.width / 10)),
+                        left: (MediaQuery.of(context).size.width / 2.25),
+                        right: (MediaQuery.of(context).size.width / 98)),
                     child: storeyDropDownList(),
                   ),
                 ],
@@ -552,7 +554,8 @@ class PredictPricePage extends State {
                   ),
                   Padding(
                     padding: EdgeInsets.only(
-                        left: (MediaQuery.of(context).size.width / 10)),
+                        left: (MediaQuery.of(context).size.width / 4.6),
+                        right: (MediaQuery.of(context).size.width / 98)),
                     child: leaseDropDownList(),
                   ),
                 ],
@@ -567,7 +570,8 @@ class PredictPricePage extends State {
                   ),
                   Padding(
                     padding: EdgeInsets.only(
-                        right: (MediaQuery.of(context).size.width / 10)),
+                        left: (MediaQuery.of(context).size.width / 90),
+                        right: (MediaQuery.of(context).size.width / 98)),
                     child: Container(
                       width: 140,
                       height: 40,
@@ -595,8 +599,8 @@ class PredictPricePage extends State {
                 ],
               ),
               SizedBox(
-                width: MediaQuery.of(context).size.width / 100,
-                height: MediaQuery.of(context).size.height / 100,
+                width: (MediaQuery.of(context).size.width / 50),
+                height: (MediaQuery.of(context).size.height / 50),
               ),
               Row(
                 children: [
@@ -608,7 +612,8 @@ class PredictPricePage extends State {
                   ),
                   Padding(
                     padding: EdgeInsets.only(
-                        right: (MediaQuery.of(context).size.width / 10)),
+                        left: (MediaQuery.of(context).size.width / 5.7),
+                        right: (MediaQuery.of(context).size.width / 98)),
                     child: Container(
                       width: 140,
                       height: 40,
@@ -636,45 +641,45 @@ class PredictPricePage extends State {
                   ),
                 ],
               ),
+              SizedBox(
+                width: (MediaQuery.of(context).size.width / 50),
+                height: (MediaQuery.of(context).size.height / 50),
+              ),
               Row(
                 children: [
                   Padding(
                     padding: EdgeInsets.only(
                         left: (MediaQuery.of(context).size.width / 10)),
-                    child: Text('Street town: ',
+                    child: Text('Street: ',
                         style: TextStyle(color: Colors.black, fontSize: 16)),
                   ),
                   Padding(
                     padding: EdgeInsets.only(
-                        right: (MediaQuery.of(context).size.width / 10),
-                        top: (MediaQuery.of(context).size.width / 100)),
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                          left: (MediaQuery.of(context).size.width / 10)),
-                      child: Container(
-                        width: 140,
-                        height: 40,
-                        child: TextFormField(
-                            inputFormatters: [
-                              FilteringTextInputFormatter.allow(
-                                  RegExp("[ a-zA-z0-9 ]"))
-                            ],
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: 'Street town',
-                            ),
-                            controller: streettowntextfield,
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.black,
-                            ),
-                            validator: (String value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please enter something!';
-                              }
-                              return null;
-                            }),
-                      ),
+                        left: (MediaQuery.of(context).size.width / 4.7),
+                        right: (MediaQuery.of(context).size.width / 98)),
+                    child: Container(
+                      width: 180,
+                      height: 40,
+                      child: TextFormField(
+                          inputFormatters: [
+                            FilteringTextInputFormatter.allow(
+                                RegExp("[ a-zA-z0-9 ]"))
+                          ],
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Street',
+                          ),
+                          controller: streettowntextfield,
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.black,
+                          ),
+                          validator: (String value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter something!';
+                            }
+                            return null;
+                          }),
                     ),
                   ),
                 ],
@@ -690,14 +695,149 @@ class PredictPricePage extends State {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20.0))),
                       child: Text('Enter'),
-                      onPressed: () {
-                        getPredictedPrice();
-                        // writeToFile();
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ShowMLPricePage(
-                                    predictedPrice: predictedPrice)));
+                      onPressed: () async {
+                        String blockNumber2 = blocktextfield.text;
+                        String streettown2 = streettowntextfield.text;
+                        String address2 = blockNumber2 + ' ' + streettown2;
+
+                        var query_string2 =
+                            'https://developers.onemap.sg/commonapi/search?searchVal=' +
+                                address2 +
+                                '&returnGeom=Y&getAddrDetails=N';
+                        var resp2 = await Requests.get(query_string2);
+                        String data2 =
+                            resp2.content(); //content of data1 has the request
+
+                        Map<String, dynamic> user2 = jsonDecode(data2);
+
+                        if (user2["found"] == 1) {
+                          print('got something');
+                          proceed = true;
+                        } else
+                          proceed = false;
+                        getLease();
+                        int floorsqm = int.parse(floorpersqmtextfield.text);
+                        String address = blocktextfield.text +
+                            ' ' +
+                            streettowntextfield.text;
+                        if (proceed == true) {
+                          String blockNumber = blocktextfield.text;
+                          String streettown = streettowntextfield.text;
+                          String address = blockNumber + ' ' + streettown;
+                          ByteData data =
+                              await rootBundle.load("assets/datasheet.xlsx");
+                          var bytes = data.buffer.asUint8List(
+                              data.offsetInBytes, data.lengthInBytes);
+                          var excel = Excel.decodeBytes(bytes);
+                          double lat2, long2;
+                          int floorsqm = int.parse(floorpersqmtextfield.text);
+                          getTown();
+                          getFlat();
+                          getStorey();
+                          getLease();
+
+                          var sheet = excel['Sheet1'];
+                          var query_string =
+                              'https://developers.onemap.sg/commonapi/search?searchVal=' +
+                                  address +
+                                  '&returnGeom=Y&getAddrDetails=N';
+                          var resp = await Requests.get(query_string);
+                          String data1 =
+                              resp.content(); //content of data1 has the request
+                          // var locFile = resp.json();
+
+                          print(data1);
+                          Map<String, dynamic> user = jsonDecode(data1);
+
+                          try {
+                            List<dynamic> data5 = user["results"];
+
+                            double lat1 = double.parse(data5[0]["LATITUDE"]);
+                            double long1 = double.parse(data5[0]["LONGITUDE"]);
+
+                            long1 = long1 * math.pi / 180;
+                            lat1 = lat1 * math.pi / 180;
+
+                            int r = 6371000;
+                            String closest_mrt = '';
+                            double smallest_dist = 10000;
+                            String mrtName, timeTaken;
+                            int timemrt;
+
+                            for (int i = 2; i <= 122; i++) {
+                              String cellLong = 'E' + i.toString();
+                              String cellLat = 'F' + i.toString();
+                              String mrt = 'A' + i.toString();
+                              String cellTime = 'B' + i.toString();
+
+                              var cellE =
+                                  sheet.cell(CellIndex.indexByString(cellLong));
+                              long2 = double.parse(cellE.value);
+
+                              var cellF =
+                                  sheet.cell(CellIndex.indexByString(cellLat));
+                              lat2 = double.parse(cellF.value);
+
+                              var cellA =
+                                  sheet.cell(CellIndex.indexByString(mrt));
+                              mrtName = cellA.value;
+
+                              var cellB =
+                                  sheet.cell(CellIndex.indexByString(cellTime));
+                              timeTaken = cellB.value.toString();
+
+                              long2 = long2 * math.pi / 180;
+                              lat2 = lat2 * math.pi / 180;
+
+                              double a = math.sin((lat2 - lat1) / 2) *
+                                      math.sin((lat2 - lat1) / 2) +
+                                  math.cos(lat1) *
+                                      math.cos(lat2) *
+                                      math.sin((long2 - long1) / 2) *
+                                      math.sin((long2 - long1) / 2);
+
+                              double c = 2 * math.asin(math.sqrt(a));
+
+                              double totaldist = c * r;
+
+                              if (totaldist < smallest_dist) {
+                                smallest_dist = totaldist;
+                                closest_mrt = mrtName;
+                                timemrt = int.parse(timeTaken);
+                              }
+                            }
+                            double timetaken = smallest_dist / 80;
+
+                            predictedPrice = 61000 +
+                                flatPremium +
+                                townPremium +
+                                3790 * storeyPremium +
+                                2820 * floorsqm +
+                                4260 * leasePremium -
+                                5740 * timetaken -
+                                5430 * timemrt;
+                          } catch (e) {
+                            print("Undefined Address");
+                          }
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ShowMLPricePage(
+                                      predictedPrice: predictedPrice,
+                                      town: town,
+                                      flattype: flattype,
+                                      storeyPremium: storeyPremium,
+                                      leasePremium: leasePremium,
+                                      floorpersqm: floorsqm,
+                                      address: address)));
+                        } else {
+                          Fluttertoast.showToast(
+                            msg: 'Invalid Address! Please try again',
+                            gravity: ToastGravity.CENTER,
+                            textColor: Colors.black,
+                            backgroundColor: Colors.blue,
+                          );
+                        }
                       }),
                 ),
               ),
@@ -706,189 +846,96 @@ class PredictPricePage extends State {
         ));
   }
 
-  // void _sendDataToPredictPrice(BuildContext context) async {
-  //   int floorsqm = int.parse(floorpersqmtextfield.text);
+  // void getPredictedPrice() async {
   //   String blockNumber = blocktextfield.text;
   //   String streettown = streettowntextfield.text;
-  //   print('can get file');
-  //   String combined = blockNumber + streettown;
-  //   ByteData data = await rootBundle.load("assets/form.xlsx");
+  //   String address = blockNumber + ' ' + streettown;
+  //   ByteData data = await rootBundle.load("assets/datasheet.xlsx");
   //   var bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
   //   var excel = Excel.decodeBytes(bytes);
-  //   Sheet sheetObject = excel['Sheet1'];
-  //   print('checking');
+  //   double lat2, long2;
+  //   int floorsqm = int.parse(floorpersqmtextfield.text);
+  //   getTown();
+  //   getFlat();
+  //   getStorey();
+  //   getLease();
 
-  //   // var cellTown = sheetObject.cell(CellIndex.indexByString("A2"));
-  //   // cellTown.value = exceltown;
-  //   // var cellFlat = sheetObject.cell(CellIndex.indexByString("B2"));
-  //   // cellFlat.value = excelflat;
-  //   // var cellStorey = sheetObject.cell(CellIndex.indexByString("C2"));
-  //   // cellStorey.value = excelstorey;
-  //   // var cellFloorPerSqm = sheetObject.cell(CellIndex.indexByString("D2"));
-  //   // cellFloorPerSqm.value = floorsqm;
-  //   // var cellLease = sheetObject.cell(CellIndex.indexByString("E2"));
-  //   // cellLease.value = excellease;
-  //   // var cellBlockStreet = sheetObject.cell(CellIndex.indexByString("F2"));
-  //   // cellBlockStreet.value = combined;
+  //   var sheet = excel['Sheet1'];
+  //   var query_string =
+  //       'https://developers.onemap.sg/commonapi/search?searchVal=' +
+  //           address +
+  //           '&returnGeom=Y&getAddrDetails=N';
+  //   var resp = await Requests.get(query_string);
+  //   String data1 = resp.content(); //content of data1 has the request
+  //   // var locFile = resp.json();
 
-  //   print('before saving');
-  //   excel.encode().then((onValue) {
-  //     File(join("assets/form.xlsx"))
-  //       ..createSync(recursive: true)
-  //       ..writeAsBytesSync(onValue);
-  //   });
-  //   print('all clear');
+  //   print(data1);
+  //   Map<String, dynamic> user = jsonDecode(data1);
+
+  //   try {
+  //     List<dynamic> data5 = user["results"];
+
+  //     double lat1 = double.parse(data5[0]["LATITUDE"]);
+  //     double long1 = double.parse(data5[0]["LONGITUDE"]);
+
+  //     long1 = long1 * math.pi / 180;
+  //     lat1 = lat1 * math.pi / 180;
+
+  //     int r = 6371000;
+  //     String closest_mrt = '';
+  //     double smallest_dist = 10000;
+  //     String mrtName, timeTaken;
+  //     int timemrt;
+
+  //     for (int i = 2; i <= 122; i++) {
+  //       String cellLong = 'E' + i.toString();
+  //       String cellLat = 'F' + i.toString();
+  //       String mrt = 'A' + i.toString();
+  //       String cellTime = 'B' + i.toString();
+
+  //       var cellE = sheet.cell(CellIndex.indexByString(cellLong));
+  //       long2 = double.parse(cellE.value);
+
+  //       var cellF = sheet.cell(CellIndex.indexByString(cellLat));
+  //       lat2 = double.parse(cellF.value);
+
+  //       var cellA = sheet.cell(CellIndex.indexByString(mrt));
+  //       mrtName = cellA.value;
+
+  //       var cellB = sheet.cell(CellIndex.indexByString(cellTime));
+  //       timeTaken = cellB.value.toString();
+
+  //       long2 = long2 * math.pi / 180;
+  //       lat2 = lat2 * math.pi / 180;
+
+  //       double a = math.sin((lat2 - lat1) / 2) * math.sin((lat2 - lat1) / 2) +
+  //           math.cos(lat1) *
+  //               math.cos(lat2) *
+  //               math.sin((long2 - long1) / 2) *
+  //               math.sin((long2 - long1) / 2);
+
+  //       double c = 2 * math.asin(math.sqrt(a));
+
+  //       double totaldist = c * r;
+
+  //       if (totaldist < smallest_dist) {
+  //         smallest_dist = totaldist;
+  //         closest_mrt = mrtName;
+  //         timemrt = int.parse(timeTaken);
+  //       }
+  //     }
+  //     double timetaken = smallest_dist / 80;
+
+  //     predictedPrice = 61000 +
+  //         flatPremium +
+  //         townPremium +
+  //         3790 * storeyPremium +
+  //         2820 * floorsqm +
+  //         4260 * leasePremium -
+  //         5740 * timetaken -
+  //         5430 * timemrt;
+  //   } catch (e) {
+  //     print("Undefined Address");
+  //   }
   // }
-
-  @override
-  void initState() {
-    super.initState();
-    getExternalStorageDirectory().then((Directory directory) {
-      dir = directory;
-      jsonFile = new File(dir.path + "/" + fileName);
-      fileExists = jsonFile.existsSync();
-      if (fileExists)
-        this.setState(
-            () => fileContent = json.decode(jsonFile.readAsStringSync()));
-    });
-  }
-
-  void createFile(
-      Map<String, dynamic> content, Directory dir, String fileName) {
-    print("Creating file!");
-    File file = new File(dir.path + "/" + fileName);
-    file.createSync();
-    fileExists = true;
-    file.writeAsStringSync(json.encode(content));
-  }
-
-  void writeToFile() {
-    print("Writing to file!");
-    String floorsqm = (floorpersqmtextfield.text);
-    String blockNumber = blocktextfield.text;
-    String streettown = streettowntextfield.text;
-    String address = blockNumber + ' ' + streettown;
-    getTown();
-    getFlat();
-    getStorey();
-    getLease();
-
-    Map<String, dynamic> content = {
-      "Town": exceltown,
-      "FlatType": excelflat,
-      "StoreyRange": excelstorey,
-      "LeaseRemaining": excellease,
-      "floorPerSqm": floorsqm,
-      "address": exceladdress
-    };
-    if (fileExists) {
-      print("File exists");
-      Map<String, dynamic> jsonFileContent =
-          json.decode(jsonFile.readAsStringSync());
-      jsonFileContent.addAll(content);
-      jsonFile.writeAsStringSync(json.encode(jsonFileContent));
-    } else {
-      print("File does not exist!");
-      createFile(content, dir, fileName);
-    }
-    this.setState(() => fileContent = json.decode(jsonFile.readAsStringSync()));
-    print(fileContent);
-  }
-
-  Future<String> get _localPath async {
-    final directory = await getExternalStorageDirectory();
-    return directory.path;
-  }
-
-  Future<File> get _localFile async {
-    final path = await _localPath;
-    return File('$path/$fileName');
-  }
-
-  void getPredictedPrice() async {
-    String blockNumber = blocktextfield.text;
-    String streettown = streettowntextfield.text;
-    String address = blockNumber + ' ' + streettown;
-    ByteData data = await rootBundle.load("assets/datasheet.xlsx");
-    var bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
-    var excel = Excel.decodeBytes(bytes);
-    double lat2, long2;
-    String floorsqm = (floorpersqmtextfield.text);
-    getTown();
-    getFlat();
-    getStorey();
-    getLease();
-
-    var sheet = excel['Sheet1'];
-    var query_string =
-        'https://developers.onemap.sg/commonapi/search?searchVal=' +
-            address +
-            '&returnGeom=Y&getAddrDetails=N';
-    var resp = await Requests.get(query_string);
-    String data1 = resp.content(); //content of data1 has the request
-    // var locFile = resp.json();
-
-    Map<String, dynamic> user = jsonDecode(data1);
-    List<dynamic> data5 = user["results"];
-
-    double lat1 = double.parse(data5[0]["LATITUDE"]);
-    double long1 = double.parse(data5[0]["LONGITUDE"]);
-
-    long1 = long1 * math.pi / 180;
-    lat1 = lat1 * math.pi / 180;
-
-    int r = 6371000;
-    String closest_mrt = '';
-    double smallest_dist = 10000;
-    String mrtName, timeTaken;
-    int timemrt;
-
-    for (int i = 2; i <= 122; i++) {
-      String cellLong = 'E' + i.toString();
-      String cellLat = 'F' + i.toString();
-      String mrt = 'A' + i.toString();
-      String cellTime = 'B' + i.toString();
-
-      var cellE = sheet.cell(CellIndex.indexByString(cellLong));
-      long2 = double.parse(cellE.value);
-
-      var cellF = sheet.cell(CellIndex.indexByString(cellLat));
-      lat2 = double.parse(cellF.value);
-
-      var cellA = sheet.cell(CellIndex.indexByString(mrt));
-      mrtName = cellA.value;
-
-      var cellB = sheet.cell(CellIndex.indexByString(cellTime));
-      timeTaken = cellB.value.toString();
-
-      long2 = long2 * math.pi / 180;
-      lat2 = lat2 * math.pi / 180;
-
-      double a = math.sin((lat2 - lat1) / 2) * math.sin((lat2 - lat1) / 2) +
-          math.cos(lat1) *
-              math.cos(lat2) *
-              math.sin((long2 - long1) / 2) *
-              math.sin((long2 - long1) / 2);
-
-      double c = 2 * math.asin(math.sqrt(a));
-
-      double totaldist = c * r;
-
-      if (totaldist < smallest_dist) {
-        smallest_dist = totaldist;
-        closest_mrt = mrtName;
-        timemrt = int.parse(timeTaken);
-      }
-    }
-    double timetaken = smallest_dist / 80;
-
-    predictedPrice = 61000 +
-        flatPremium +
-        townPremium +
-        3790 * storeyPremium +
-        2820 * int.parse(floorsqm) +
-        4260 * leasePremium -
-        5740 * timetaken -
-        5430 * timemrt;
-  }
 }
