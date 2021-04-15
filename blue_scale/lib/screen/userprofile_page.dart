@@ -3,7 +3,6 @@ import 'package:blue_scale/entity/user.dart';
 import 'package:blue_scale/screen/auth/login_main.dart';
 import 'package:flutter/material.dart';
 import 'package:blue_scale/entity/DataAccess.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:blue_scale/controller/user_controller.dart';
 
 final _formKey = GlobalKey<FormState>();
@@ -18,7 +17,7 @@ class userprofile_page extends StatefulWidget {
 }
 
 class _userprofile_pageState extends State<userprofile_page> {
-  final ImagePicker _picker = ImagePicker();
+  //final ImagePicker _picker = ImagePicker();
   String _blkno, _address, _phone, _storey, _price;
 
   @override

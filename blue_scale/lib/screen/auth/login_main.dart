@@ -115,6 +115,7 @@ class LoginScreen extends StatelessWidget {
                               MaterialPageRoute(
                                   builder: (context) => WelcomePage()));
                           print('success');
+                          Fluttertoast.showToast(msg: 'Login Successful');
                         }
                       } on FirebaseAuthException catch (error) {
                         Fluttertoast.showToast(

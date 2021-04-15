@@ -1,9 +1,7 @@
+import 'package:blue_scale/screen/userprofile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:excel/excel.dart';
-import 'dart:io';
-import 'package:path/path.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:flutter/services.dart' show ByteData, rootBundle;
 import 'dart:convert';
 import 'package:requests/requests.dart';
@@ -49,6 +47,13 @@ class PredictPrice extends StatefulWidget {
 }
 
 class PredictPricePage extends State {
+  final Color primaryColor = Color(0xff18203d);
+
+  final Color secondaryColor = Color(0xff232c51);
+
+  final Color themeColor = Color(0xFFFFF3E0);
+
+  final Color Orange = Color(0xffffab40);
   double predictedPrice;
   String town = 'Ang Mo Kio';
   String flattype = 'Adjoined Flat';
@@ -469,8 +474,28 @@ class PredictPricePage extends State {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-            automaticallyImplyLeading: true,
-            title: Text('Predict Price for Flat')),
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back, color: Colors.black),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+            actions: [
+              IconButton(
+                  alignment: Alignment.center,
+                  icon: new Icon(Icons.account_circle, size: 35),
+                  color: Colors.black,
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => userprofile_page()));
+                  })
+            ],
+            backgroundColor: themeColor,
+            automaticallyImplyLeading: false,
+            title: Text('Predict Price for Flat',
+                style: TextStyle(
+                  color: Colors.black,
+                ))),
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

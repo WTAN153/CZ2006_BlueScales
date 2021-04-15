@@ -127,6 +127,14 @@ Widget topupg(BuildContext context) {
   );
 }
 
+Widget btoinfo(BuildContext context) {
+  return const Tooltip(
+    message:
+        'BTO only allows for Enhanced Housing Grant and no more grants are included in the calculation',
+    child: Icon(Icons.info_outline),
+  );
+}
+
 Widget money() {
   return TextFormField(
       inputFormatters: [FilteringTextInputFormatter.digitsOnly],

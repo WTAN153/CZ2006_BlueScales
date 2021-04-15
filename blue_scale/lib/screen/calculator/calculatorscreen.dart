@@ -2,6 +2,7 @@ import 'package:blue_scale/screen/calculator/grantpage.dart';
 import 'package:flutter/material.dart';
 import 'package:blue_scale/controller/calculator.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class CalculatorOptions extends StatefulWidget {
   String price;
@@ -379,6 +380,8 @@ class CalculatorOptionsWidget extends State<CalculatorOptions> {
                         ),
                         validator: (String value) {
                           if (value == null || value.isEmpty) {
+                            Fluttertoast.showToast(
+                                msg: "Please enter some numbers!");
                             return 'Please enter some numbers';
                           }
                           return null;
@@ -409,7 +412,7 @@ class CalculatorOptionsWidget extends State<CalculatorOptions> {
                         color: Colors.black,
                         fontWeight: FontWeight.normal,
                         fontSize: 16)),
-                topupg(context),
+                btoinfo(context),
                 SizedBox(width: 225),
                 dropButton3()
               ]),
@@ -485,7 +488,11 @@ class CalculatorOptionsWidget extends State<CalculatorOptions> {
             ),
             TextButton(
                 onPressed: () {
-                  _sendDataToSecondScreen(context);
+                  try {
+                    _sendDataToSecondScreen(context);
+                  } catch (e) {
+                    Fluttertoast.showToast(msg: "Please enter some numbers!");
+                  }
                 },
                 child: Text('Calculate'),
                 style: TextButton.styleFrom(

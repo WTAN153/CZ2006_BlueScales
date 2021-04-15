@@ -15,10 +15,17 @@ import 'package:flutter/material.dart';
 // }
 
 class ShowMLPricePage extends StatelessWidget {
+  final Color primaryColor = Color(0xff18203d);
+
+  final Color secondaryColor = Color(0xff232c51);
+
+  final Color themeColor = Color(0xFFFFF3E0);
+
+  final Color Orange = Color(0xffffab40);
   final double predictedPrice;
 
-  String town, flattype, address;
-  int storeyPremium, leasePremium, floorpersqm;
+  final String town, flattype, address;
+  final int storeyPremium, leasePremium, floorpersqm;
   ShowMLPricePage({
     Key key,
     @required this.predictedPrice,
@@ -32,7 +39,11 @@ class ShowMLPricePage extends StatelessWidget {
   @override
   Widget build(context) {
     return Scaffold(
-        appBar: AppBar(title: Text('Results')),
+        appBar: AppBar(
+            title: Text('Results',
+                style: TextStyle(
+                  color: Colors.black,
+                ))),
         body: SingleChildScrollView(
           child: Column(children: [
             Padding(
@@ -52,9 +63,9 @@ class ShowMLPricePage extends StatelessWidget {
               child: Center(
                 child: Text("\$ " + predictedPrice.toStringAsFixed(2),
                     style: TextStyle(
-                        color: Colors.black,
+                        color: Orange,
                         fontWeight: FontWeight.bold,
-                        fontSize: 20)),
+                        fontSize: 50)),
               ),
             ),
             Padding(
