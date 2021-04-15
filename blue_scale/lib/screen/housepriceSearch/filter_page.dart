@@ -65,7 +65,7 @@ class _filter_screenState extends State<filter_screen> {
           Padding(
             padding: const EdgeInsets.fromLTRB(1, 0, 0, 0),
             child: Container(
-              width: 250,
+              width: 225,
               height: 50,
               child: TypeAheadFormField<String>(
                 textFieldConfiguration: TextFieldConfiguration(
@@ -113,7 +113,7 @@ class _filter_screenState extends State<filter_screen> {
             Padding(
               padding: const EdgeInsets.fromLTRB(1, 0, 0, 0),
               child: Container(
-                width: 250,
+                width: 225,
                 height: 50,
                 child: TypeAheadFormField<String>(
                   textFieldConfiguration: TextFieldConfiguration(
@@ -172,7 +172,7 @@ class _filter_screenState extends State<filter_screen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              SizedBox(height: 50),
+              SizedBox(height: MediaQuery.of(context).size.height/10),
               Text('Filter Search',
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -196,7 +196,7 @@ class _filter_screenState extends State<filter_screen> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(60, 0, 0, 0),
                     child: Container(
-                      width: 250,
+                      width: 225,
                       height: 50,
                       child: TextField(
                         style: TextStyle(color: Colors.black),
@@ -232,7 +232,7 @@ class _filter_screenState extends State<filter_screen> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(57, 0, 0, 0),
                     child: Container(
-                      width: 250,
+                      width: 225,
                       height: 50,
                       child: TextField(
                         style: TextStyle(color: Colors.black),
