@@ -13,8 +13,8 @@ void main() {
     app.main();
 
     await tester.pumpAndSettle();
-    final emailFormField = find.byType(TextFormField).first;
-    final passwordFormField = find.byType(TextFormField).last;
+    final emailFormField = find.byType(TextField).first;
+    final passwordFormField = find.byType(TextField).last;
     final loginButton = find.byType(MaterialButton).first;
 
     await tester.tap(emailFormField);
@@ -31,42 +31,42 @@ void main() {
         findsNothing);
   });
 
-  // testWidgets("Login with wrong password", (WidgetTester tester) async {
-  //   app.main();
+  testWidgets("Login with wrong password", (WidgetTester tester) async {
+    app.main();
 
-  //   await tester.pumpAndSettle();
-  //   final emailFormField = find.byType(TextFormField).first;
-  //   final passwordFormField = find.byType(TextFormField).last;
-  //   final loginButton = find.byType(MaterialButton).first;
+    await tester.pumpAndSettle();
+    final emailFormField = find.byType(TextField).first;
+    final passwordFormField = find.byType(TextField).last;
+    final loginButton = find.byType(MaterialButton).first;
 
-  //   await tester.tap(emailFormField);
-  //   await tester.enterText(emailFormField, 'dummy@gmail.com');
-  //   await tester.tap(passwordFormField);
-  //   await tester.enterText(passwordFormField, 'dummy123!');
-  //   await tester.pumpAndSettle();
+    await tester.tap(emailFormField);
+    await tester.enterText(emailFormField, 'dummy@gmail.com');
+    await tester.tap(passwordFormField);
+    await tester.enterText(passwordFormField, 'dummy123!');
+    await tester.pumpAndSettle();
 
-  //   await tester.tap(loginButton);
-  //   expect(
-  //       find.text(
-  //           'The password is invalid or the user does not have a password.'),
-  //       findsNothing);
-  // });
+    await tester.tap(loginButton);
+    expect(
+        find.text(
+            'The password is invalid or the user does not have a password.'),
+        findsNothing);
+  });
 
-  // testWidgets("Login successfully", (WidgetTester tester) async {
-  //   app.main();
+  testWidgets("Login successfully", (WidgetTester tester) async {
+    app.main();
 
-  //   await tester.pumpAndSettle();
-  //   final emailFormField = find.byType(TextFormField).first;
-  //   final passwordFormField = find.byType(TextFormField).last;
-  //   final loginButton = find.byType(MaterialButton).first;
+    await tester.pumpAndSettle();
+    final emailFormField = find.byType(TextField).first;
+    final passwordFormField = find.byType(TextField).last;
+    final loginButton = find.byType(MaterialButton).first;
 
-  //   await tester.tap(emailFormField);
-  //   await tester.enterText(emailFormField, 'dummy@gmail.com');
-  //   await tester.tap(passwordFormField);
-  //   await tester.enterText(passwordFormField, 'dummy123');
-  //   await tester.pumpAndSettle();
+    await tester.tap(emailFormField);
+    await tester.enterText(emailFormField, 'dummy@gmail.com');
+    await tester.tap(passwordFormField);
+    await tester.enterText(passwordFormField, 'dummy123');
+    await tester.pumpAndSettle();
 
-  //   await tester.tap(loginButton);
-  //   expect(find.text('Login Successfully'), findsNothing);
-  // });
+    await tester.tap(loginButton);
+    expect(find.text('Login Successfully'), findsNothing);
+  });
 }
