@@ -14,6 +14,16 @@ class UserController{
       await DataAccess(uid: user).updateRentData(blk, address, phone, storey, price);
 
     }
+
+  static  storefav(String blk, String address,String storey, String price) async {
+    final  user = LoginController().getCurrentUID();
+    await DataAccess(uid: user).updatefavData(blk, address, storey, price);
+
+  }
+
+
+
+
   }
 
 

@@ -47,7 +47,7 @@ class _RentsearchScreenState extends State<RentsearchScreen> {
   @override
   Widget build(BuildContext context) {
     final user = LoginController().getCurrentUID();
-    print(queryResultSet);
+
 
     return StreamProvider<List<Rentdata>>.value(
       value: DataAccess().rentDatas,
@@ -104,7 +104,7 @@ class _RentsearchScreenState extends State<RentsearchScreen> {
         backgroundColor: themeColor,
         extendBodyBehindAppBar: true,
         body: RentListsearch(queryResultSet),
-        bottomNavigationBar: BottomAppBar(
+/*        bottomNavigationBar: BottomAppBar(
           elevation: 0,
           color: Colors.transparent,
           child: Row(
@@ -138,7 +138,7 @@ class _RentsearchScreenState extends State<RentsearchScreen> {
               )),
             ],
           ),
-        ),
+        ),*/
       ),
     );
   }

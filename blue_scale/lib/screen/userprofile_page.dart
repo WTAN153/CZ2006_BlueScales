@@ -1,6 +1,7 @@
 import 'package:blue_scale/controller/login_controller.dart';
 import 'package:blue_scale/entity/user.dart';
 import 'package:blue_scale/screen/auth/login_main.dart';
+import 'package:blue_scale/screen/rent_function/rentposting_page.dart';
 import 'package:flutter/material.dart';
 import 'package:blue_scale/entity/DataAccess.dart';
 import 'package:blue_scale/controller/user_controller.dart';
@@ -24,7 +25,7 @@ class _userprofile_pageState extends State<userprofile_page> {
   Widget build(BuildContext context) {
     final user = LoginController()
         .getCurrentUID(); // Get current login user id from the firebase
-    //final user ='3aaaQuCYAHhfgeTByBPHAqqR11B3';
+
 
     return StreamBuilder<Userprofiledata>(
         stream: DataAccess(uid: user).userData,
@@ -154,26 +155,59 @@ class _userprofile_pageState extends State<userprofile_page> {
                             }),
                         SizedBox(height: 20.0),
 
-                        MaterialButton(
-                          // delete the current rent post
+                        Row(
 
-                          onPressed: () async {
-                            await UserController.storeRent(
-                                _blkno = "null".toString().trim(),
-                                _address = "null".toString().trim(),
-                                _phone = userData.phone.toString().trim(),
-                                _storey = "null".toString().trim(),
-                                _price = "null".toString().trim());
-                            //print(_address);
-                            Navigator.of(context).maybePop();
-                          },
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(60,0,0,0),
+                              child: MaterialButton(
+                                // delete the current rent post
 
-                          color: Colors.pink[400],
+                                onPressed: () async {
+                                  await UserController.storeRent(
+                                      _blkno = "null".toString().trim(),
+                                      _address = "null".toString().trim(),
+                                      _phone = userData.phone.toString().trim(),
+                                      _storey = "null".toString().trim(),
+                                      _price = "null".toString().trim());
+                                  //print(_address);
+                                  Navigator.of(context).maybePop();
+                                },
 
-                          child: Text('Delete Post',
-                              style: TextStyle(color: Colors.white)),
-                          textColor: Colors.white,
+                                color: Colors.pink[400],
+
+                                child: Text('Delete Post',
+                                    style: TextStyle(color: Colors.white)),
+                                textColor: Colors.white,
+                              ),
+                            ),
+                            Spacer(),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(0,0,60,0),
+                              child: MaterialButton(
+                                // delete the current rent post
+
+                                onPressed: () async {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => rentpost_screen()));
+                                },
+
+                                color: Colors.pink[400],
+
+                                child: Text('Create Post',
+                                    style: TextStyle(color: Colors.white)),
+                                textColor: Colors.white,
+                              ),
+                            ),
+
+
+                          ],
+
                         ),
+
+
                         //Text("post: ${rents}" ,style: TextStyle(fontSize: 20, color: Colors.black) ),
                       ])),
                   SizedBox(height: 100.0),
