@@ -58,7 +58,7 @@ class _rentpost_screenState extends State<rentpost_screen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                SizedBox(height: 50),
+                SizedBox(height: MediaQuery.of(context).size.height/10),
                 Text('Put up for Rent',
                     textAlign: TextAlign.center,
                     style: TextStyle(
@@ -72,7 +72,8 @@ class _rentpost_screenState extends State<rentpost_screen> {
                 Row(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                      padding: EdgeInsets.only(
+                          left: (MediaQuery.of(context).size.width/30)),
                       child: Container(
                           child: Text(
                         "Block no. : ",
@@ -80,9 +81,10 @@ class _rentpost_screenState extends State<rentpost_screen> {
                       )),
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(35, 0, 0, 0),
+                      padding: EdgeInsets.only(
+                          left: (MediaQuery.of(context).size.width/9)),
                       child: Container(
-                        width: 250,
+                        width: 225,
                         height: 50,
                         child: TextField(
                           style: TextStyle(color: Colors.black),
@@ -106,7 +108,8 @@ class _rentpost_screenState extends State<rentpost_screen> {
                 Row(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                padding: EdgeInsets.only(
+                left: (MediaQuery.of(context).size.width/30)),
                       child: Container(
                           child: Text(
                         "Address : ",
@@ -114,9 +117,10 @@ class _rentpost_screenState extends State<rentpost_screen> {
                       )),
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(45, 0, 0, 0),
+                      padding: EdgeInsets.only(
+                          left: (MediaQuery.of(context).size.width/7.8)),
                       child: Container(
-                        width: 250,
+                        width: 225,
                         height: 50,
                         child: TextField(
                           style: TextStyle(color: Colors.black),
@@ -142,7 +146,8 @@ class _rentpost_screenState extends State<rentpost_screen> {
                 Row(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                      padding: EdgeInsets.only(
+                          left: (MediaQuery.of(context).size.width/30)),
                       child: Container(
                           child: Text(
                         "Phone no. : ",
@@ -150,9 +155,10 @@ class _rentpost_screenState extends State<rentpost_screen> {
                       )),
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(28, 0, 0, 0),
+                        padding: EdgeInsets.only(
+                            left: (MediaQuery.of(context).size.width/11)),
                       child: Container(
-                        width: 250,
+                        width: 225,
                         height: 50,
                         child: TextField(
                           style: TextStyle(color: Colors.black),
@@ -178,7 +184,8 @@ class _rentpost_screenState extends State<rentpost_screen> {
                 Row(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                      padding: EdgeInsets.only(
+                          left: (MediaQuery.of(context).size.width/30)),
                       child: Container(
                           child: Text(
                         "Storey : ",
@@ -186,9 +193,9 @@ class _rentpost_screenState extends State<rentpost_screen> {
                       )),
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(60, 0, 0, 0),
-                      child: Container(
-                        width: 250,
+                      padding: EdgeInsets.only(
+                          left: (MediaQuery.of(context).size.width/5.7)),                      child: Container(
+                        width: 225,
                         height: 50,
                         child: TextField(
                           style: TextStyle(color: Colors.black),
@@ -214,7 +221,8 @@ class _rentpost_screenState extends State<rentpost_screen> {
                 Row(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                      padding: EdgeInsets.only(
+                          left: (MediaQuery.of(context).size.width/30)),
                       child: Container(
                           child: Text(
                         "Price/Month : ",
@@ -222,9 +230,10 @@ class _rentpost_screenState extends State<rentpost_screen> {
                       )),
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                      padding: EdgeInsets.only(
+                          left: (MediaQuery.of(context).size.width/30)),
                       child: Container(
-                        width: 250,
+                        width: 225,
                         height: 50,
                         child: TextField(
                           style: TextStyle(color: Colors.black),
