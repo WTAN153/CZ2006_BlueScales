@@ -1,4 +1,5 @@
 import 'package:blue_scale/controller/login_controller.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:blue_scale/entity/user.dart';
 import 'package:blue_scale/screen/auth/login_main.dart';
 import 'package:blue_scale/screen/rent_function/rentposting_page.dart';
@@ -25,7 +26,6 @@ class _userprofile_pageState extends State<userprofile_page> {
   Widget build(BuildContext context) {
     final user = LoginController()
         .getCurrentUID(); // Get current login user id from the firebase
-
 
     return StreamBuilder<Userprofiledata>(
         stream: DataAccess(uid: user).userData,
@@ -156,20 +156,27 @@ class _userprofile_pageState extends State<userprofile_page> {
                         SizedBox(height: 20.0),
 
                         Row(
-
                           children: [
                             Padding(
-                              padding: const EdgeInsets.fromLTRB(60,0,0,0),
+                              padding: const EdgeInsets.fromLTRB(60, 0, 0, 0),
                               child: MaterialButton(
                                 // delete the current rent post
 
                                 onPressed: () async {
-                                  await UserController.storeRent(
-                                      _blkno = "null".toString().trim(),
-                                      _address = "null".toString().trim(),
-                                      _phone = userData.phone.toString().trim(),
-                                      _storey = "null".toString().trim(),
-                                      _price = "null".toString().trim());
+                                  String uid =
+                                      LoginController().getCurrentUID();
+                                  DocumentReference docRef =
+                                      await FirebaseFirestore.instance
+                                          .collection('info')
+                                          .doc(uid);
+                                  await docRef.update({
+                                    "address": null,
+                                    "blk": null,
+                                    "name": null,
+                                    "price": null,
+                                    "storey": null,
+                                    "phone": null
+                                  });
                                   //print(_address);
                                   Navigator.of(context).maybePop();
                                 },
@@ -183,7 +190,7 @@ class _userprofile_pageState extends State<userprofile_page> {
                             ),
                             Spacer(),
                             Padding(
-                              padding: const EdgeInsets.fromLTRB(0,0,60,0),
+                              padding: const EdgeInsets.fromLTRB(0, 0, 60, 0),
                               child: MaterialButton(
                                 // delete the current rent post
 
@@ -191,7 +198,8 @@ class _userprofile_pageState extends State<userprofile_page> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => rentpost_screen()));
+                                          builder: (context) =>
+                                              rentpost_screen()));
                                 },
 
                                 color: Colors.pink[400],
@@ -201,12 +209,8 @@ class _userprofile_pageState extends State<userprofile_page> {
                                 textColor: Colors.white,
                               ),
                             ),
-
-
                           ],
-
                         ),
-
 
                         //Text("post: ${rents}" ,style: TextStyle(fontSize: 20, color: Colors.black) ),
                       ])),
