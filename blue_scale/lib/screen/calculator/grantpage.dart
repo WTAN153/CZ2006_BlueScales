@@ -24,124 +24,135 @@ class GrantPage extends StatelessWidget {
     @required this.ans7,
     @required this.ans8,
     @required this.ans9, // this is the original price
-
   }) : super(key: key);
   int ecg, pg, fg, ecsg, hg, grant, predictedprice;
 
-  int finalprice,iprice;
-
+  int finalprice, iprice;
 
   @override
   Widget build(BuildContext context) {
-
-    oprice=ans9;
+    oprice = ans9;
     iprice = int.parse(oprice);
 
-
-    finalprice=iprice- totalgrant(
-        ecgc(ans1, text, ans3),
-        pgc(ans6),
-        fgc(ans1, text, ans3, ans2, ans5),
-        hgc(ans1, text, ans7),
-        ecgs(ans1, text, ans8)); // calculate the final price
+    finalprice = iprice -
+        totalgrant(
+            ecgc(ans1, text, ans3),
+            pgc(ans6),
+            fgc(ans1, text, ans3, ans2, ans5),
+            hgc(ans1, text, ans7),
+            ecgs(ans1, text, ans8)); // calculate the final price
 
     return Scaffold(
         appBar: AppBar(
           backgroundColor: themeColor,
           leading: new IconButton(
             icon: new Icon(Icons.arrow_back),
-            color:Colors.black,
+            color: Colors.black,
             onPressed: () {
               Navigator.of(context).maybePop();
             },
           ),
-          title: Text('Grant Applicable',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 30),),
+          title: Text(
+            'Grant Applicable',
+            style: TextStyle(
+                color: Colors.black, fontWeight: FontWeight.bold, fontSize: 30),
+          ),
         ),
-        body: Center(
-            child: Column(
-              children: [
-                SizedBox(height: 20),
-                Padding(
-                  padding: const EdgeInsets.only(top: 8.0, bottom: 0),
-                  child: Text('Purchaseable Price',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 25)),
+        body: SingleChildScrollView(
+          child: Center(
+              child: Column(
+            children: [
+              SizedBox(height: MediaQuery.of(context).size.height / 100 * 2),
+              Padding(
+                padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.height / 100,
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(5),
-                  child: Text('Based on the price and after deduction due to grant',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.normal,
-                          fontSize: 16)),
-                ),
-                SizedBox(height: 10),
-                Text(finalprice.toString(),
+                child: Text('Purchaseable Price',
                     style: TextStyle(
-                        color: Colors.orange,
+                        color: Colors.black,
                         fontWeight: FontWeight.bold,
-                        fontSize: 50)),
-                SizedBox(
-                  height: 20,
-                ),
-                //overallcost(grant, predictedprice)
-                //.toString()), //TODO change to the original-the grant()
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(oprice,
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16)) //TODO replace with predicted price
-                    ,
-                    Text(' - ',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16)),
-                    Text(
-                        totalgrant(
-                                ecgc(ans1, text, ans3),
-                                pgc(ans6),
-                                fgc(ans1, text, ans3, ans2, ans5),
-                                hgc(ans1, text, ans7),
-                                ecgs(ans1, text, ans8))
-                            .toString(),
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16))
-                  ],
-
-                ),
-                Text('(Price)     (Grant)',
+                        fontSize: 25)),
+              ),
+              Padding(
+                padding: EdgeInsets.only(
+                    left: MediaQuery.of(context).size.width / 100 * 2,
+                    bottom: MediaQuery.of(context).size.height / 100 * 2,
+                    top: MediaQuery.of(context).size.height / 100 * 2,
+                    right: MediaQuery.of(context).size.width / 100 * 2),
+                child: Text(
+                    'Based on the price and after deduction due to grant',
                     style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.normal,
                         fontSize: 16)),
-                SizedBox(
-                  height: 40,
-                ),
-                Container(
-
-                  decoration: BoxDecoration(
-                    border: Border.all(
+              ),
+              SizedBox(height: MediaQuery.of(context).size.height / 100),
+              Text(finalprice.toString(),
+                  style: TextStyle(
+                      color: Colors.orange,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 50)),
+              SizedBox(
+                height: MediaQuery.of(context).size.height / 100,
+              ),
+              //overallcost(grant, predictedprice)
+              //.toString()), //TODO change to the original-the grant()
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(oprice,
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16)) //TODO replace with predicted price
+                  ,
+                  Text(' - ',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16)),
+                  Text(
+                      totalgrant(
+                              ecgc(ans1, text, ans3),
+                              pgc(ans6),
+                              fgc(ans1, text, ans3, ans2, ans5),
+                              hgc(ans1, text, ans7),
+                              ecgs(ans1, text, ans8))
+                          .toString(),
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16))
+                ],
+              ),
+              Text('(Price)     (Grant)',
+                  style: TextStyle(
                       color: Colors.black,
-                      width: 1,
-
-
-                    ),
-                      borderRadius:BorderRadius.circular(20)
-                  ),
-                  height: 300,
-                  width: 400,
+                      fontWeight: FontWeight.normal,
+                      fontSize: 16)),
+              SizedBox(
+                height: MediaQuery.of(context).size.height / 100 * 4,
+              ),
+              Padding(
+                padding: EdgeInsets.only(
+                  left: MediaQuery.of(context).size.width / 100 * 4,
+                  right: MediaQuery.of(context).size.width / 100 * 4,
+                  top: MediaQuery.of(context).size.height / 100,
+                  bottom: MediaQuery.of(context).size.height / 100 * 2,
+                ),
+                child: Container(
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.black,
+                        width: MediaQuery.of(context).size.width / 100,
+                      ),
+                      borderRadius: BorderRadius.circular(20)),
+                  height: MediaQuery.of(context).size.height / 100 * 62,
+                  width: MediaQuery.of(context).size.width / 100 * 95,
                   child: Column(
-
                     children: [
-                      SizedBox(height: 10),
+                      SizedBox(
+                          height: MediaQuery.of(context).size.height / 100),
                       Text('Grant Break Down',
                           style: TextStyle(
                               color: Colors.orange,
@@ -151,8 +162,10 @@ class GrantPage extends StatelessWidget {
                       Row(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(
-                                left: 50.0, right: 20.0, top: 0, bottom: 8.0),
+                            padding: EdgeInsets.only(
+                                left:
+                                    MediaQuery.of(context).size.width / 100 * 5,
+                                top: MediaQuery.of(context).size.height / 100),
                             child: Text('Enchanced House Grant',
                                 style: TextStyle(
                                     color: Colors.black,
@@ -160,117 +173,179 @@ class GrantPage extends StatelessWidget {
                                     fontSize: 16)),
                           ),
                           SizedBox(
-                            width: 40,
+                            width: MediaQuery.of(context).size.width / 100 * 20,
                           ),
-                          SizedBox(
-                            child: Text(ecgc(ans1, text, ans3).toString(),
+                          Padding(
+                            padding: EdgeInsets.only(
+                                left: MediaQuery.of(context).size.width / 100,
+                                top: MediaQuery.of(context).size.height / 100),
+                            child: SizedBox(
+                              child: Text(ecgc(ans1, text, ans3).toString(),
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16)),
+                            ),
+                          )
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(
+                                left:
+                                    MediaQuery.of(context).size.width / 100 * 5,
+                                top: MediaQuery.of(context).size.height /
+                                    100 *
+                                    5),
+                            child: Text('Family Grant',
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 16)),
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width / 100 * 42,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(
+                                top: MediaQuery.of(context).size.height /
+                                    100 *
+                                    5),
+                            child: SizedBox(
+                              child: Text(
+                                  fgc(ans1, text, ans3, ans2, ans5).toString(),
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16)),
+                            ),
                           )
                         ],
                       ),
-                  Row(
-                    children: [
+                      Row(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(
+                                left:
+                                    MediaQuery.of(context).size.width / 100 * 5,
+                                top: MediaQuery.of(context).size.height /
+                                    100 *
+                                    5),
+                            child: Text('Proximity Grant',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16)),
+                          ),
+                          SizedBox(
+                              width: MediaQuery.of(context).size.width /
+                                  100 *
+                                  36.3),
+                          Padding(
+                            padding: EdgeInsets.only(
+                                top: MediaQuery.of(context).size.height /
+                                    100 *
+                                    5),
+                            child: SizedBox(
+                              child: Text(pgc(ans6).toString(),
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16)),
+                            ),
+                          )
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(
+                                left:
+                                    MediaQuery.of(context).size.width / 100 * 5,
+                                top: MediaQuery.of(context).size.height /
+                                    100 *
+                                    5),
+                            child: Text('Enhanced Grant for Single',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16)),
+                          ),
+                          SizedBox(
+                              width:
+                                  MediaQuery.of(context).size.width / 100 * 17),
+                          Padding(
+                            padding: EdgeInsets.only(
+                                top: MediaQuery.of(context).size.height /
+                                    100 *
+                                    5),
+                            child: SizedBox(
+                              child: Text(ecgs(ans1, text, ans8).toString(),
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16)),
+                            ),
+                          )
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(
+                                left:
+                                    MediaQuery.of(context).size.width / 100 * 5,
+                                top: MediaQuery.of(context).size.height /
+                                    100 *
+                                    5),
+                            child: Text('Half Housing Grant',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16)),
+                          ),
+                          SizedBox(
+                              width: MediaQuery.of(context).size.width /
+                                  100 *
+                                  29.7),
+                          Padding(
+                            padding: EdgeInsets.only(
+                                top: MediaQuery.of(context).size.height /
+                                    100 *
+                                    5),
+                            child: SizedBox(
+                              child: Text(hgc(ans1, text, ans7).toString(),
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16)),
+                            ),
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                          height: MediaQuery.of(context).size.height / 100 * 7),
                       Padding(
-                        padding: const EdgeInsets.only(
-                            left: 50.0, right: 20.0, top: 8.0, bottom: 8.0),
-                        child: Text('Family Grant',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16)),
-                      ),
-                      SizedBox(
-                        width: 122,
-                      ),
-                      SizedBox(
+                        padding: EdgeInsets.only(
+                          left: MediaQuery.of(context).size.width / 5,
+                          right: MediaQuery.of(context).size.width / 5,
+                        ),
                         child: Text(
-                            fgc(ans1, text, ans3, ans2, ans5).toString(),
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16)),
-                      )
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            left: 50.0, right: 20.0, top: 8.0, bottom: 8.0),
-                        child: Text('Proximity Grant',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16)),
-                      ),
-                      SizedBox(width: 100),
-                      SizedBox(
-                        child: Text(pgc(ans6).toString(),
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16)),
-                      )
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            left: 50.0, right: 20.0, top: 8.0, bottom: 8.0),
-                        child: Text('Enhanced Grant for Single',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16)),
-                      ),
-                      SizedBox(width: 25),
-                      Text(ecgs(ans1, text, ans8).toString(),
+                          '*Above grant calculated is just an estimate and may not be the exact amount. Please consult with your realtor for the amount.',
                           style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16))
+                            fontSize: 10.0,
+                            color: Colors.blueGrey,
+                          ),
+                        ),
+                      ),
                     ],
                   ),
-                  Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            left: 50.0, right: 20.0, top: 8.0, bottom: 8.0),
-                        child: Text('Half Housing Grant',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16)),
-                      ),
-                      SizedBox(width: 75),
-                      SizedBox(
-                        child: Text(hgc(ans1, text, ans7).toString(),
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16)),
-                      )
-                    ],
-                  ),
-                      SizedBox(height: 30),
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text('*Above grant calculated is just an estimate and may not be the exact amount. Please consult with your realtor for the amount.', style: TextStyle(
-                          fontSize: 10.0,
-                          color: Colors.blueGrey,
-                        ),),
-                      ),
-
-
-                ],
+                ),
               ),
-            ),
-          ],
-        )));
+            ],
+          )),
+        ));
   }
 
   //ans1 = firsttime, ans2 =  bighouse, ans3 = BTO, ans4 = enchanced grant, ans5 = family grant, ans6 = proximity, ans7= half house, ans8=single

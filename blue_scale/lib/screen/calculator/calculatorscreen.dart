@@ -338,9 +338,13 @@ class CalculatorOptionsWidget extends State<CalculatorOptions> {
         backgroundColor: themeColor,
         body: SingleChildScrollView(
           child: Column(children: [
-            SizedBox(height: 20),
+            SizedBox(height: MediaQuery.of(context).size.height / 100 * 1),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: EdgeInsets.only(
+                left: MediaQuery.of(context).size.width / 100 * 5,
+                bottom: MediaQuery.of(context).size.height / 100 * 2,
+                top: MediaQuery.of(context).size.height / 100,
+              ),
               child: Row(
                 children: [
                   Text('Both First time buyers?',
@@ -348,13 +352,17 @@ class CalculatorOptionsWidget extends State<CalculatorOptions> {
                           color: Colors.black,
                           fontWeight: FontWeight.normal,
                           fontSize: 16)),
-                  SizedBox(width: 120),
+                  SizedBox(width: MediaQuery.of(context).size.width / 100 * 33),
                   dropButton(),
                 ],
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: EdgeInsets.only(
+                left: MediaQuery.of(context).size.width / 100 * 5,
+                bottom: MediaQuery.of(context).size.height / 100 * 2,
+                top: MediaQuery.of(context).size.height / 100,
+              ),
               child: Row(
                 children: [
                   Text('Average Gross Monthly Income ',
@@ -363,8 +371,8 @@ class CalculatorOptionsWidget extends State<CalculatorOptions> {
                           fontWeight: FontWeight.normal,
                           fontSize: 16)),
                   Container(
-                    width: 150,
-                    height: 40.0,
+                    width: MediaQuery.of(context).size.width / 100 * 33,
+                    height: MediaQuery.of(context).size.height / 100 * 5,
                     child: TextFormField(
                         inputFormatters: [
                           FilteringTextInputFormatter.digitsOnly
@@ -391,7 +399,11 @@ class CalculatorOptionsWidget extends State<CalculatorOptions> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: EdgeInsets.only(
+                left: MediaQuery.of(context).size.width / 100 * 5,
+                bottom: MediaQuery.of(context).size.height / 100 * 0.5,
+                top: MediaQuery.of(context).size.height / 100,
+              ),
               child: Row(
                 children: [
                   Text('Buying 5-room flat or bigger?',
@@ -399,13 +411,18 @@ class CalculatorOptionsWidget extends State<CalculatorOptions> {
                           color: Colors.black,
                           fontWeight: FontWeight.normal,
                           fontSize: 16)),
-                  SizedBox(width: 75),
+                  SizedBox(
+                      width: MediaQuery.of(context).size.width / 100 * 21.7),
                   dropButton2()
                 ],
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: EdgeInsets.only(
+                left: MediaQuery.of(context).size.width / 100 * 5,
+                bottom: MediaQuery.of(context).size.height / 100 * 0.5,
+                top: MediaQuery.of(context).size.height / 100,
+              ),
               child: Row(children: [
                 Text('BTO?',
                     style: TextStyle(
@@ -413,12 +430,16 @@ class CalculatorOptionsWidget extends State<CalculatorOptions> {
                         fontWeight: FontWeight.normal,
                         fontSize: 16)),
                 btoinfo(context),
-                SizedBox(width: 225),
+                SizedBox(width: MediaQuery.of(context).size.width / 100 * 58),
                 dropButton3()
               ]),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: EdgeInsets.only(
+                left: MediaQuery.of(context).size.width / 100 * 5,
+                bottom: MediaQuery.of(context).size.height / 100 * 0.5,
+                top: MediaQuery.of(context).size.height / 100,
+              ),
               child: Row(
                 children: [
                   Text('Enhanced Housing Grant? ',
@@ -427,13 +448,17 @@ class CalculatorOptionsWidget extends State<CalculatorOptions> {
                           fontWeight: FontWeight.normal,
                           fontSize: 16)),
                   ehgcouple(context),
-                  SizedBox(width: 73),
+                  SizedBox(width: MediaQuery.of(context).size.width / 100 * 20),
                   dropButton4()
                 ],
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: EdgeInsets.only(
+                left: MediaQuery.of(context).size.width / 100 * 5,
+                bottom: MediaQuery.of(context).size.height / 100 * 0.5,
+                top: MediaQuery.of(context).size.height / 100,
+              ),
               child: Row(
                 children: [
                   Text('Family Grant? ',
@@ -442,13 +467,17 @@ class CalculatorOptionsWidget extends State<CalculatorOptions> {
                           fontWeight: FontWeight.normal,
                           fontSize: 16)),
                   familyg(context),
-                  SizedBox(width: 160),
+                  SizedBox(width: MediaQuery.of(context).size.width / 100 * 42),
                   dropButton5()
                 ],
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: EdgeInsets.only(
+                left: MediaQuery.of(context).size.width / 100 * 5,
+                bottom: MediaQuery.of(context).size.height / 100 * 0.5,
+                top: MediaQuery.of(context).size.height / 100,
+              ),
               child: Row(children: [
                 Text('Proximity Grant? ',
                     style: TextStyle(
@@ -456,12 +485,16 @@ class CalculatorOptionsWidget extends State<CalculatorOptions> {
                         fontWeight: FontWeight.normal,
                         fontSize: 16)),
                 proxig(context),
-                SizedBox(width: 140),
+                SizedBox(width: MediaQuery.of(context).size.width / 100 * 36),
                 dropButton6()
               ]),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: EdgeInsets.only(
+                left: MediaQuery.of(context).size.width / 100 * 5,
+                bottom: MediaQuery.of(context).size.height / 100 * 0.5,
+                top: MediaQuery.of(context).size.height / 100,
+              ),
               child: Row(children: [
                 Text('Half Housing Grant? ',
                     style: TextStyle(
@@ -469,12 +502,16 @@ class CalculatorOptionsWidget extends State<CalculatorOptions> {
                         fontWeight: FontWeight.normal,
                         fontSize: 16)),
                 halfhouseg(context),
-                SizedBox(width: 115),
+                SizedBox(width: MediaQuery.of(context).size.width / 100 * 29),
                 dropButton7()
               ]),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: EdgeInsets.only(
+                left: MediaQuery.of(context).size.width / 100 * 5,
+                bottom: MediaQuery.of(context).size.height / 100 * 0.5,
+                top: MediaQuery.of(context).size.height / 100,
+              ),
               child: Row(children: [
                 Text('Enhanced Housing Grant(Single)? ',
                     style: TextStyle(
@@ -482,7 +519,7 @@ class CalculatorOptionsWidget extends State<CalculatorOptions> {
                         fontWeight: FontWeight.normal,
                         fontSize: 16)),
                 echsingle(context),
-                SizedBox(width: 20),
+                SizedBox(width: MediaQuery.of(context).size.width / 100 * 4.5),
                 dropButton8()
               ]),
             ),

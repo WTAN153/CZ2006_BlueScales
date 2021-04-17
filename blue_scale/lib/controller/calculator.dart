@@ -82,7 +82,7 @@ Widget ehgcouple(BuildContext context) {
 Widget familyg(BuildContext context) {
   return const Tooltip(
     message:
-        'Grant of 50k unless applying for 5-room flat or bigger (10k in this scenario) if both are first time and gross monthly income < 14k for a year',
+        'Grant of 50k unless applying for 5-room flat or bigger (10k if applying for 5-room and above) if both are first time and gross monthly income < 14k for a year',
     child: Icon(Icons.info_outline),
   );
 }
@@ -98,7 +98,7 @@ Widget proxig(BuildContext context) {
 Widget halfhouseg(BuildContext context) {
   return const Tooltip(
     message:
-        'Grant of 25k unless applying for 5-room flat or bigger (5k in this scenario) one person must be first time and the other is second time applying, with gross monthly income capped at 14k ',
+        'Grant of 25k unless applying for 5-room flat or bigger (5k if 5-room or bigger) one person must be first time and the other is second time applying, with gross monthly income capped at 14k ',
     child: Icon(Icons.info_outline),
   );
 }
